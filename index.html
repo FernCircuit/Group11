@@ -1,12 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="indexStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-  <h1>Hello World! Future home of Group 11 project!!!!</h1>
+
+    <!--Nav bar. The events.html and materials.html are just placeholders at the moment.-->
+    <nav>
+        <a href="index.html">Overview</a>
+        <a href="signup.html">Attendees</a>
+        <a href="events.html">Schedule</a>
+        <a href="materials.html">Material Management</a>
+    </nav>
+
+    <!--We can remove the banner later if we like, its mostly just for content right now.-->
+    <section class="banner" aria-label="Page banner">
+        <img src="imgs\Banner.jpg" alt="banner image">
+    </section>
+
+    <!--
+    As the project develops I was thinking we could repurpose this as a management overview page with general statistics.
+    We could display bits and pieces of general info in the divs. Like total attendees in the attendee card, material stocks
+    in the materials card, etc.
+    -->
+    <section class="content" aria-label="Main content">
+        <div class="welcome">
+            <h2>Overview</h2>
+        </div>
+        <div class="card">
+
+            <p><img class="card-img-left" src="imgs\person.jpg" alt="placeholder image 1">In the attendees page you
+                will be able to input attendee information like their name, email-address, phone number, age, and
+                affiliation.</p>
+
+        </div>
+        <div class="card">
+
+            <p><img class="card-img-right" src="imgs\event.jpg" alt="placeholder image 1">In the schedules page
+                you will be able to manage the events within your conference. Listing such as type, date, and length of
+                time.</p>
+
+        </div>
+        <div class="card">
+
+            <p><img class="card-img-left" src="imgs\speaker.jpg" alt="placeholder image 1">Material management will
+                let you list and keep track of all materials needed for your conference. Such as speakers, chairs,
+                dividers, etc.</p>
+
+        </div>
+    </section>
+    <section class="footer" aria-label="Page footer">
+        <p>&copy; 2026 Your Website. All rights reserved.</p>
+    </section>
+
 
 </body>
+
 </html>

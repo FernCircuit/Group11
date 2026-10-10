@@ -1,0 +1,85 @@
+/* 
+I decided to create a separate CSS file to stay organized, but this can change if we feel like it.
+Its a little rough at the moment so I will likely refine in the future.
+*/
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+nav a {
+    color: #ececec;
+    text-decoration: none;
+}
+
+.content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: linear-gradient(0deg, rgb(102, 101, 101), rgb(234, 234, 241));
+}
+
+.banner {
+    height: 240px;
+    overflow: hidden;
+}
+
+.banner img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.welcome {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    color: #0f172a;
+    letter-spacing: -0.03em;
+}
+
+.card>p {
+    margin: 1rem;
+}
+
+.card {
+    width: 50%;
+    margin: 2rem;
+}
+
+.card-img-left {
+    display: flex;
+    align-items: left;
+    float: left;
+    border-radius: 15px;
+    margin-right: 15px;
+    max-width: 200px;
+    max-height: 50%;
+
+}
+
+.card-img-right {
+    align-items: left;
+    float: right;
+    border-radius: 15px;
+    margin-left: 15px;
+    max-width: 200px;
+    max-height: 50%;
+}
+
+.footer {
+    background: #111827;
+    color: #e5e7eb;
+    text-align: center;
+    margin-top: -2rem;
+    padding: 1.5rem 1rem;
+    font-size: 0.96rem;
+
+}
