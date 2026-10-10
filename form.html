@@ -1,0 +1,65 @@
+<form id="sign-up">
+  //Part 1: Point of Contact Information
+  <fieldset>
+    <legend>Point of Contact</legend>
+    <div class="form-item">
+      <label for="poc-firstname">First Name:</label>
+      <input type="text" name="poc-firstname" id="poc-firstname" required>
+    </div>
+    <div class="form-item">
+      <label for="poc-lastname">Last Name:</label>
+      <input type="text" name="poc-lastname" id="poc-lastname" required>
+    </div>
+    <div class="form-item">
+      <label for="poc-email">Email Address:</label>
+      <input type="email" name="poc-email" id="poc-email" required>
+    </div>
+    <div class="form-item">
+      <label for="poc-phone">Phone Number:</label>
+      <input type="tel" name="poc-phone" id="poc-phone">
+    </div>
+  </fieldset>
+  //Part 2: Organization Information
+  <fieldset>
+    <legend>Group Information</legend>
+    <div class="form-item">
+      <label for="max-attendees">Maximum Number of Attendees:</label>
+      <select name="max-attendees" id="max-attendees">
+        <option value="250">250</option>
+        <option value="500">500</option>
+        <option value="1500">1,500</option>
+        <option value="2000">2,000</option>
+        <option value="2500">2,500</option>
+        <option value="3000">3,000</option>
+        <option value="4500">4,500</option>
+        <option value="5000">5,000</option>
+      </select>
+    </div>
+    <div class="form-item">
+      <label for="org-name">Organization:</label>
+      <input type="text" name="org-name" id="org-name" required>
+    </div>
+    <div class="form-item">
+      <label for="org-industry">Industry:</label>
+      <select name="org-industry" id="org-industry">
+        <option value="tech">Technology & Software</option>
+        <option value="heal">Healthcare & Life Sciences</option>
+        <option value="fina">Finance & Insurance</option>
+        <option value="educ">Education</option>
+        <option value="nonp">Non-Profit & Philanthropy</option>
+        <option value="gove">Government</option>
+        <option value="manu">Manufacturing & Logistics</option>
+        <option value="reta">Retail & Consumer Goods</option>
+        <option value="prof">Professional Services</option>
+        <option value="medi">Media & Entertainment</option>
+        <option value="ener">Energy & Utilities</option>
+        <option value="real">Real Estate & Construction</option>
+      </select>
+    </div>
+    <div class="form-item">
+      <label for="org-requests">Special Requests:</label><br>
+      <textarea name="org-requests" id="org-requests" rows="5" cols="40" placeholder="Enter requests here..."></textarea>
+    </div>
+  </fieldset>
+  <input type="submit" name="submit" value="Submit">
+</form>
