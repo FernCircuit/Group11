@@ -18,12 +18,14 @@ legend{
 /* Conference Gallery */
 
 .conference-photo {
-  width: 100%;
-  height: 230px;
+  display: block;
+  width: 150%;
+  height: 2300px;
   object-fit: cover;
 }
 
 .conference-gallery .card {
+  height: 100%;
   border: none;
   border-radius:10px;
   overflow: hidden;
@@ -37,7 +39,7 @@ legend{
 
 .conference-gallery p {
   color: #555;
-  line-height:1.5;
+  line-height: 1.5;
 
 }
 
