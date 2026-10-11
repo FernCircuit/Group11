@@ -15,31 +15,4 @@ legend{
 
 }
 
-/* Conference Gallery */
-
-.conference-photo {
-  display: block;
-  width: 150%;
-  height: 2300px;
-  object-fit: cover;
-}
-
-.conference-gallery .card {
-  height: 100%;
-  border: none;
-  border-radius:10px;
-  overflow: hidden;
-
-}
-
-.conference-gallery h3 {
-  color: #1e5b7c;
-
-}
-
-.conference-gallery p {
-  color: #555;
-  line-height: 1.5;
-
-}
 
