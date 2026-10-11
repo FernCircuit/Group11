@@ -1,5 +1,8 @@
+<!-- START FORM -->
 <form id="sign-up">
+  <!---------------------------------------->
   <!--Part 1: Point of Contact Information-->
+  <!---------------------------------------->
   <fieldset>
     <!-- POC FIRST NAME -->
     <legend>Point of Contact</legend>
@@ -30,11 +33,13 @@
       <input type="radio" name="poc-method" id="poc-method-phone" value="phone">
       <label for="poc-method-phone">Phone</label>
     </div>
-      
   </fieldset>
+  <!------------------------------------>
   <!--Part 2: Organization Information-->
+  <!------------------------------------>
   <fieldset>
     <legend>Group Information</legend>
+    <!-- NUMBER ATTENDEES -->
     <div class="form-item">
       <label for="max-attendees">Maximum Number of Attendees:</label>
       <select name="max-attendees" id="max-attendees">
@@ -48,10 +53,12 @@
         <option value="5000">5,000</option>
       </select>
     </div>
+    <!-- ORGANIZATION NAME -->
     <div class="form-item">
       <label for="org-name">Organization:</label>
       <input type="text" name="org-name" id="org-name" required>
     </div>
+    <!-- INDUSTRY DROPDOWN -->
     <div class="form-item">
       <label for="org-industry">Industry:</label>
       <select name="org-industry" id="org-industry">
@@ -69,9 +76,14 @@
         <option value="real">Real Estate & Construction</option>
       </select>
     </div>
+    <!-- REQUESTED CONFERENCE DATES -->
     <div class="form-item">
-      <label for="org-date">Requested Date:</label>
-      <input type="date" name="org-date" id="org-date">
+      <label for="org-date">Requested Start Date:</label>
+      <input type="date" name="org-date" id="org-date-start">
+      <label for="org-date">Requested End Date:</label>
+      <input type="date" name="org-date" id="org-date-end">
+    </div>
+    <!-- SPECIAL REQUEST BOX -->
     <div class="form-item">
       <label for="org-requests">Special Requests:</label><br>
       <textarea name="org-requests" id="org-requests" rows="5" cols="40" placeholder="Enter requests here..."></textarea>
