@@ -36,35 +36,39 @@
              <!-- POC FIRST NAME -->
                 <legend>Point of Contact</legend>
                 <div class="form-item mb-3">
-                    <label for="poc-firstname">First Name:</label>
-                    <input type="text" name="poc-firstname" id="poc-firstname">
+                    <label class="form-label" for="poc-firstname">First Name:</label>
+                    <input class="form-control" type="text" name="poc-firstname" id="poc-firstname">
                     <span class="errorMsg"></span>
                 </div>
                 <!-- POC LAST NAME -->
                 <div class="form-item mb-3">
-                    <label for="poc-lastname">Last Name:</label>
-                    <input type="text" name="poc-lastname" id="poc-lastname">
+                    <label class="form-label" for="poc-lastname">Last Name:</label>
+                    <input class="form-control" type="text" name="poc-lastname" id="poc-lastname">
                     <span class="errorMsg"></span>
                 </div>
             <!-- POC EMAIL -->
             <div class="form-item mb-3">
-              <label for="poc-email">Email Address:</label>
-              <input type="email" name="poc-email" id="poc-email">
+              <label for="poc-email" class="form-label">Email Address:</label>
+              <input class="form-control" type="email" name="poc-email" id="poc-email">
                 <span class="errorMsg"></span>
             </div>
         <!-- POC PHONE -->
             <div class="form-item mb-3">
-              <label for="poc-phone">Phone Number:</label>
-              <input type="tel" name="poc-phone" id="poc-phone">
+              <label for="poc-phone" class="form-label">Phone Number:</label>
+              <input class="form-control" type="tel" name="poc-phone" id="poc-phone">
                 <span class="errorMsg"></span>
            </div>
         <!-- POC PREFERRED METHOD -->
         <div class="form-item mb-3">
-              <label>Preferred Method of Contact:</label>
-              <input type="radio" name="poc-method" id="poc-method-email" value="email">
-              <label for="poc-method-email">Email</label>
-              <input type="radio" name="poc-method" id="poc-method-phone" value="phone">
-              <label for="poc-method-phone">Phone</label>
+            <label class="form-label d-block">Preferred Method of Contact:</label>
+            <div class="form-check form-check-inline">  
+                <input class="form-check-input" type="radio" name="poc-method" id="poc-method-email" value="email">
+                <label class="form-check-label" for="poc-method-email">Email</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="poc-method" id="poc-method-phone" value="phone">
+              <label class="form-check-label" for="poc-method-phone">Phone</label>
+            </div>
         </div>
       </fieldset>
   <!------------------------------------>
@@ -74,20 +78,20 @@
     <legend>Group Information</legend>
     <!-- NUMBER ATTENDEES -->
     <div class="form-item mb-3"> <!-- this takes place of AGE for assignment requirements-->
-        <label for="max-attendees">Maximum Number of Attendees:</label>
-        <input type="number" name="max-attendees" id="max-attendees" class="form-control">
+        <label class="form-label" for="max-attendees">Maximum Number of Attendees:</label>
+        <input class="form-control" type="number" name="max-attendees" id="max-attendees" class="form-control">
         <span class="errorMsg"></span>
     </div>
     <!-- ORGANIZATION NAME -->
     <div class="form-item mb-3">
-      <label for="org-name">Organization:</label>
-      <input type="text" name="org-name" id="org-name">
+      <label class="form-label" for="org-name">Organization:</label>
+      <input class="form-control" type="text" name="org-name" id="org-name">
         <span class="errorMsg"></span>
     </div>
     <!-- INDUSTRY DROPDOWN -->
     <div class="form-item mb-3">
-      <label for="org-industry">Industry:</label>
-      <select name="org-industry" id="org-industry">
+      <label class="form-label" for="org-industry">Industry:</label>
+      <select class="form-control" name="org-industry" id="org-industry">
         <option value="">-- Select an Industry --</option>
         <option value="tech">Technology & Software</option>
         <option value="heal">Healthcare & Life Sciences</option>
@@ -106,17 +110,17 @@
     </div>
     <!-- REQUESTED CONFERENCE DATES -->
     <div class="form-item mb-3">
-      <label for="org-date">Requested Start Date:</label>
-      <input type="date" name="org-date" id="org-date-start">
+      <label class="form-label" for="org-date">Requested Start Date:</label>
+      <input class="form-control" type="date" name="org-date" id="org-date-start">
         <span class="errorMsg"></span>
-      <label for="org-date">Requested End Date:</label>
-      <input type="date" name="org-date" id="org-date-end">
+      <label class="form-label" for="org-date">Requested End Date:</label>
+      <input class="form-control" type="date" name="org-date" id="org-date-end">
         <span class="errorMsg"></span>
     </div>
     <!-- SPECIAL REQUEST BOX -->
     <div class="form-item mb-3">
-      <label for="org-requests">Special Requests:</label><br>
-      <textarea name="org-requests" id="org-requests" rows="5" cols="40" placeholder="Enter requests here..."></textarea>
+      <label class="form-label" for="org-requests">Special Requests:</label><br>
+      <textarea class="form-control" name="org-requests" id="org-requests" rows="5" cols="40" placeholder="Enter requests here..."></textarea>
     </div>
   </fieldset>
   <input type="submit" name="submit" value="Submit">
