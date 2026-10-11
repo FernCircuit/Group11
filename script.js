@@ -36,6 +36,17 @@ function validatePhone(input, uniqueMsg){
     errorMsg.textContent = "";
   }
 }
+// d.) Verify number of attendees
+function validateNumber(input, uniqueMsg){
+   let errorMsg = input.nextElementSibling;
+  if(input.value === ""){
+    errorMsg.textContent = "This field is required.";
+  } else if (isNaN(input.value) || Number(input.value) <= 0){
+    errorMsg.textContent = uniqueMsg;
+  } else {
+    errorMsg.textContent = "";
+  }
+}
 
 // ------------------------------------
 // 2. GET ALL INPUTS FROM THE FORM
@@ -45,9 +56,9 @@ let lName = document.getElementById('poc-lastname'); //Store POC Last Name
 let email = document.getElementById('poc-email'); //Store POC Email
 let phone = document.getElementById('poc-phone'); //Store POC Phone
 let radioBtns = document.getElementsByName('poc-method'); //Get radio buttons from form
-let dropdown1 = document.getElementById('max-attendees'); // Get the dropdown
+let maxAttendees = document.getElementById('max-attendees'); // Get the dropdown
 let orgName = document.getElementById('org-name'); //Store Organization Name
-let dropdown2 = document.getElementById('org-industry'); //Get the dropdown
+let industryOptions = document.getElementById('org-industry'); //Get the dropdown
 let startDate = document.getElementById('org-date-start');
 let endDate = document.getElementById('org-date-end');
 let specReqs = document.getElementById('org-requests');
@@ -57,11 +68,23 @@ let signupForm = document.getElementById('sign-up');
 //---------------------------------
 // add event listener to wait for user submits
 signupForm.addEventListener("submit", function(event){
+  event.preventDefault(); //prevents the page from clearing out
+  let resetErrors = document.querySelectorAll('.errorMsg'); // clear out any error messages from before:
+  resetErrors.forEach(span => span.textContent="");
   validateInput(fName, "Please enter valid first name.");
   validateInput(lName, "Please enter valid last name.");
   validateEmail(email, "Email address must includ an @ symbol.");
   validatePhone(phone, "Please enter a valid 10-digit phone number.");
-
+  validateNumber(maxAttendees, "Please enter more than zero attendees");
+  // check for any errors that exist
+  let foundError = false;
+  for (let span of resetErrors){
+    if(span.textContent !== ""){
+      foundError = true;
+      break;
+    }
+  }
+  if (!foundError){
   // Get the preferred contact setting
   let contactMethod = "email"; // Set a default contact method
   // (extract value from the radio buttons if checked):
@@ -71,22 +94,19 @@ signupForm.addEventListener("submit", function(event){
       break;
     }
   }
-  // Get dropdown values
-  const numAttendees = dropdown1.value; // Store value from dropdown
-  const orgIndustry = dropdown2.value; // Store value from dropdown
-
   // START JSON---------------------
 
   let userObj = {
     fullname: fName.value + " " + lName.value,
     email: email.value,
     phone: phone.value,
-    age: age.value,
-    address: address.value,
     preferredContact: contactMethod,
     organization: orgName.value,
-    maxAttendeesRequested: dropdown1.value,
-    organizationIndustry: dropdown2.value   
+    maxAttendeesRequested: maxAttendees.value,
+    organizationIndustry: industryOptions.value,
+    startDate: startDate.value,
+    endDate: endDate.value,
+    specialRequests: specReqs.value
   };
 
   let userJsonStr = JSON.stringify(userObj,null,2);
@@ -102,6 +122,7 @@ signupForm.addEventListener("submit", function(event){
   document.body.removeChild(downloadLink);
   
   alert("Form submitted successfully! We'll be in touch soon!");
+  }
 });
 
 
