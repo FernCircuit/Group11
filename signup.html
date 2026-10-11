@@ -29,44 +29,42 @@
     <!--
     Matches the homepage. Section below for Sign-Up form:
     -->
-    <section class="content" aria-label="Main content" id="form-container">
-<!-- START FORM -->
+    <section class="content" aria-label="Main content">
         <!-- START FORM -->
-<form id="sign-up">
-  <!---------------------------------------->
-  <!--Part 1: Point of Contact Information-->
-  <!---------------------------------------->
-  <fieldset>
-    <!-- POC FIRST NAME -->
-    <legend>Point of Contact</legend>
-    <div class="form-item">
-      <label for="poc-firstname">First Name:</label>
-      <input type="text" name="poc-firstname" id="poc-firstname" required>
-    </div>
-    <!-- POC LAST NAME -->
-    <div class="form-item">
-      <label for="poc-lastname">Last Name:</label>
-      <input type="text" name="poc-lastname" id="poc-lastname" required>
-    </div>
-    <!-- POC EMAIL -->
-    <div class="form-item">
-      <label for="poc-email">Email Address:</label>
-      <input type="email" name="poc-email" id="poc-email" required>
-    </div>
-    <!-- POC PHONE -->
-    <div class="form-item">
-      <label for="poc-phone">Phone Number:</label>
-      <input type="tel" name="poc-phone" id="poc-phone">
-    </div>
-    <!-- POC PREFERRED METHOD -->
-    <div class="form-item">
-      <label>Preferred Method of Contact:</label>
-      <input type="radio" name="poc-method" id="poc-method-email" value="email">
-      <label for="poc-method-email">Email</label>
-      <input type="radio" name="poc-method" id="poc-method-phone" value="phone">
-      <label for="poc-method-phone">Phone</label>
-    </div>
-  </fieldset>
+        <div class="form-container">
+            <form id="sign-up">
+            <!--Part 1: Point of Contact Information-->
+            <fieldset>
+             <!-- POC FIRST NAME -->
+                <legend>Point of Contact</legend>
+                <div class="form-item">
+                  <label for="poc-firstname">First Name:</label>
+                  <input type="text" name="poc-firstname" id="poc-firstname" required>
+                </div>
+                <!-- POC LAST NAME -->
+                <div class="form-item">
+                    <label for="poc-lastname">Last Name:</label>
+                    <input type="text" name="poc-lastname" id="poc-lastname" required>
+                </div>
+            <!-- POC EMAIL -->
+            <div class="form-item">
+              <label for="poc-email">Email Address:</label>
+              <input type="email" name="poc-email" id="poc-email" required>
+            </div>
+        <!-- POC PHONE -->
+            <div class="form-item">
+              <label for="poc-phone">Phone Number:</label>
+              <input type="tel" name="poc-phone" id="poc-phone">
+           </div>
+        <!-- POC PREFERRED METHOD -->
+        <div class="form-item">
+              <label>Preferred Method of Contact:</label>
+              <input type="radio" name="poc-method" id="poc-method-email" value="email">
+              <label for="poc-method-email">Email</label>
+              <input type="radio" name="poc-method" id="poc-method-phone" value="phone">
+              <label for="poc-method-phone">Phone</label>
+        </div>
+      </fieldset>
   <!------------------------------------>
   <!--Part 2: Organization Information-->
   <!------------------------------------>
