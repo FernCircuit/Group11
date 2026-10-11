@@ -74,6 +74,34 @@ signupForm.addEventListener("submit", function(event){
   // Get dropdown values
   const numAttendees = dropdown1.value; // Store value from dropdown
   const orgIndustry = dropdown2.value; // Store value from dropdown
+
+  // START JSON---------------------
+
+  let userObj = {
+    fullname: fName.value + " " + lName.value,
+    email: email.value,
+    phone: phone.value,
+    age: age.value,
+    address: address.value,
+    preferredContact: contactMethod,
+    organization: orgName.value,
+    maxAttendeesRequested: dropdown1.value,
+    organizationIndustry: dropdown2.value   
+  };
+
+  let userJsonStr = JSON.stringify(userObj,null,2);
+
+  let blob = new Blob([userJsonStr],{type:"application/json"});
+  let downloadLink = document.createElement("a");
+
+  downloadLink.download = "members.json";
+  downloadLink.href = URL.createObjectURL(blob);
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+  
+  alert("Form submitted successfully! We'll be in touch soon!");
 });
 
 
