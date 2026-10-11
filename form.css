@@ -1,18 +1,13 @@
 /* Sign-up */
 /* Add CSS for Sign-Up Form Below */
-form #sign-up{
-
-
+.errorMsg{
+  color: #dc3545;
+  font-size:0.85em;
+  display:block;
+  margin-top:4px;
 }
-.form-item{
-
-
+.errorMsg:not(:empty)::before{
+  content: "* ";
+  font-weight:bold;
 }
-fieldset{
-
-}
-legend{
-
-}
-
 
