@@ -2,7 +2,6 @@
 I decided to create a separate CSS file to stay organized, but this can change if we feel like it.
 Its a little rough at the moment so I will likely refine in the future.
 */
-
 nav {
     display: flex;
     justify-content: space-around;
@@ -10,12 +9,10 @@ nav {
     padding: 1rem;
     background: linear-gradient(135deg, #0f172a, #1e293b);
 }
-
 nav a {
     color: #ececec;
     text-decoration: none;
 }
-
 .content {
     align-items: center;
     display: flex;
@@ -24,19 +21,16 @@ nav a {
     padding-bottom: 1rem;
     background: linear-gradient(0deg, rgb(102, 101, 101), rgb(234, 234, 241));
 }
-
 .banner {
     height: 240px;
     overflow: hidden;
 }
-
 .banner img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .welcome {
     margin-top: 1rem;
     text-align: center;
@@ -44,16 +38,13 @@ nav a {
     color: #0f172a;
     letter-spacing: -0.03em;
 }
-
 .card>p {
     margin: 1rem;
 }
-
 .card {
     width: 50%;
     margin: 2rem;
 }
-
 .card-img-left {
     display: flex;
     align-items: left;
@@ -62,9 +53,7 @@ nav a {
     margin-right: 15px;
     max-width: 200px;
     max-height: 50%;
-
 }
-
 .card-img-right {
     align-items: left;
     float: right;
@@ -73,7 +62,6 @@ nav a {
     max-width: 200px;
     max-height: 50%;
 }
-
 .footer {
     background: #111827;
     color: #e5e7eb;
@@ -81,34 +69,39 @@ nav a {
     margin-top: -2rem;
     padding: 1.5rem 1rem;
     font-size: 0.96rem;
-
 }
-
 /* Conference Gallery */
-
 .conference-photo {
   display: block;
   width: 150%;
   height: 2300px;
   object-fit: cover;
 }
-
 .conference-gallery .card {
   height: 100%;
   border: none;
   border-radius:10px;
   overflow: hidden;
-
 }
-
 .conference-gallery h3 {
   color: #1e5b7c;
-
 }
-
 .conference-gallery p {
   color: #555;
   line-height: 1.5;
-
+}
+.gallery-card {
+  height: 280px;    
+  overflow: hidden;  
+}
+.gallery-img {
+  height: 130px;   
+  object-fit: cover;  
+}
+.card-description {
+  color: #6c757d; 
+  font-size: 0.85rem; 
+  line-height: 1.2;   
+  margin-bottom: 0; 
 }
 
