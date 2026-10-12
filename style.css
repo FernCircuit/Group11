@@ -77,11 +77,16 @@ nav a {
   height: 100px;
   object-fit: cover;
 }
+.conference-gallery {
+  display: flex;
+  gap: 12px;   
+}
 .conference-gallery .card {
   height: 100%;
   border: none;
   border-radius:10px;
   overflow: hidden;
+  margin: 0px;
 }
 .conference-gallery h3 {
   color: #1e5b7c;
