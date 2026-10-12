@@ -73,7 +73,7 @@ nav a {
 /* Conference Gallery */
 .conference-photo {
   display: block;
-  width: 150%;
+  width: 100%;
   height: 2300px;
   object-fit: cover;
 }
