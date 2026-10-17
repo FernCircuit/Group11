@@ -30,17 +30,18 @@ function loadTable(){
         +'<td>'+item.category+'</td>'
         +'<td>'+item.quantity+'</td>'
         +'<td>$'+item.price+'</td>'
-        +'<td><button class="modify-btn">Modify</button><button class="delete-btn">Delete</button></td>';
+        +'<td><button class=id="modify-btn" data-id="'+item.id+'">Modify</button><button id="delete-btn" data-id="'+item.id+'">Delete</button></td>';
       tBody.appendChild(row);
     });
   };
-
-
-/*//DELETE ITEMS
+//DELETE ITEMS
 function deleteMaterial(materialId){
-  allMaterials = allMaterials.filter(function(item){
-    return item.id !== materialId;
-    
+  let targetItem = allMaterials.filter(function(item){
+    return item.id !== targetItem;
+  });
+  localStorage.setItem('SummitPointInventory', JSON.stringify(allMaterials));
+  loadTable(); //load table without the item that was deleted
+}
 //MODIFY
 function modifyMaterial(materialId){
   let targetItem = allMaterials.find(function(item){
