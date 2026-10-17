@@ -54,7 +54,7 @@ let quantityInput = document.getElementById("material-quantity");
 let priceInput = document.getElementById("material-price");
 
 
-/* dev notes - fetch is a built-in function provided by the web browser
+dev notes - fetch is a built-in function provided by the web browser
 but it doesn't automatically give back the data so it can load properly.
 It hands back a Promise. The .then() is a method that runs once the file comes back.
 .then() methods are sequential, happening in the order they appear
