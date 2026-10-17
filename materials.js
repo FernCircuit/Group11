@@ -1,36 +1,57 @@
 //FETCH THE FILE
+let allMaterials = []; //array to store list of materials
+let savedList = localStorage.getItem('SummitPointInventory');
+if (savedList){
+  allMaterials = JSON.parse(savedList);
+  loadTable();
+}else{
 fetch('materials.json') //this sends request to grab the json file
   .then(function(incomingFile) { //implements function once the file arrives
     return incomingFile.json(); //this returns the ready to use data. json() parses the data to readable format
   })
 //PREPARE THE DATA
   .then(function(cleanData){ //now take the data and format it for entry
-    
-    console.log(cleanData); //this prints to console to view first - optional
-    let table = document.getElementById('tablename');
-    table.innerHTML=''; //clears out the entire table. This is required so the table can be refreshed with new items
-    let id = 1;
-    cleanData.forEach(function(material){
-      let row = document.createElement('tr');
-      row.innerHTML = '<td>'+material.id+'</td>'+'<td>'
-        +'<td>'+material.name+'</td>'
-        +'<td>'+material.category+'</td>'
-        +'<td>'+material.quantity+'</td>'
-        +'<td>'+material.price+'</td>'
-        +'<td><button class="modify-btn">Modify</button>'
-        +'<button class="delete-btn">Delete</button></td>';
-      tableBody.appendChild(row);
-
-    });
+    localStorage.setItem('SummitPointInventory', JSON.stringify(allMaterials));
+    loadTable();
   })
-.catch(function(error){
-  console.error('Something went wrong: ', error);
+.catch(function(error){ //report error if something didn't load properly
+  console.error('Inventory could not be loaded: ', error);
 });
-/*let name = document.getElementById("material-name");
-let category = document.getElementById("material-category");
-let quantity = document.getELementById("material-quantity");
-let price = document.getElementById("material-price");
-*/
+
+//LOAD THE TABLE - this function also refreshes when delete, add, and modify are done
+function loadTable(){ 
+    let tBody = document.getElementById('');
+    tBody.innerHTML=''; //clears out the entire table. This is required so the table can be refreshed with new items
+    let id = 1;
+    allMaterials.forEach(function(item){
+      let row = document.createElement('tr');
+      row.innerHTML = '<td>'+item.id+'</td>'+'<td>'
+        +'<td>'+item.name+'</td>'
+        +'<td>'+item.category+'</td>'
+        +'<td>'+item.quantity+'</td>'
+        +'<td>'+item.price+'</td>'
+        +'<td><button class="modify-btn">Modify</button><button class="delete-btn">Delete</button></td>';
+      tBody.appendChild(row);
+    });
+  };
+
+
+/*//DELETE ITEMS
+function deleteMaterial(materialId){
+  allMaterials = allMaterials.filter(function(item){
+    return item.id !== materialId;
+    
+//MODIFY
+function modifyMaterial(materialId){
+  let targetItem = allMaterials.find(function(item){
+    return item.id === materialId;
+  });
+
+let nameInput = document.getElementById("material-name");
+let categoryInput = document.getElementById("material-category");
+let quantityInput = document.getElementById("material-quantity");
+let priceInput = document.getElementById("material-price");
+
 
 /* dev notes - fetch is a built-in function provided by the web browser
 but it doesn't automatically give back the data so it can load properly.
