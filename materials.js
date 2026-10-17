@@ -11,13 +11,14 @@ fetch('materials.json') //this sends request to grab the json file
   })
 //PREPARE THE DATA
   .then(function(cleanData){ //now take the data and format it for entry
+    allMaterials = cleanData; //fill array with clean json data
     localStorage.setItem('SummitPointInventory', JSON.stringify(allMaterials));
     loadTable();
   })
 .catch(function(error){ //report error if something didn't load properly
   console.error('Inventory could not be loaded: ', error);
 });
-
+}
 //LOAD THE TABLE - this function also refreshes when delete, add, and modify are done
 function loadTable(){ 
     let tBody = document.getElementById('material-table');
@@ -25,7 +26,7 @@ function loadTable(){
     let id = 1;
     allMaterials.forEach(function(item){
       let row = document.createElement('tr');
-      row.innerHTML = '<td>'+item.id+'</td>'+'<td>'
+      row.innerHTML = '<td>'+item.id+'</td>'
         +'<td>'+item.name+'</td>'
         +'<td>'+item.category+'</td>'
         +'<td>'+item.quantity+'</td>'
