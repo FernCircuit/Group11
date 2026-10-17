@@ -23,14 +23,13 @@ fetch('materials.json') //this sends request to grab the json file
 function loadTable(){ 
     let tBody = document.getElementById('material-table');
     tBody.innerHTML=''; //clears out the entire table. This is required so the table can be refreshed with new items
-    let id = 1;
     allMaterials.forEach(function(item){
       let row = document.createElement('tr');
       row.innerHTML = '<td>'+item.id+'</td>'
         +'<td>'+item.name+'</td>'
         +'<td>'+item.category+'</td>'
         +'<td>'+item.quantity+'</td>'
-        +'<td>'+item.price+'</td>'
+        +'<td>$'+item.price+'</td>'
         +'<td><button class="modify-btn">Modify</button><button class="delete-btn">Delete</button></td>';
       tBody.appendChild(row);
     });
