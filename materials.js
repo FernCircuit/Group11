@@ -20,7 +20,7 @@ fetch('materials.json') //this sends request to grab the json file
 
 //LOAD THE TABLE - this function also refreshes when delete, add, and modify are done
 function loadTable(){ 
-    let tBody = document.getElementById('');
+    let tBody = document.getElementById('material-table');
     tBody.innerHTML=''; //clears out the entire table. This is required so the table can be refreshed with new items
     let id = 1;
     allMaterials.forEach(function(item){
