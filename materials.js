@@ -30,7 +30,7 @@ function loadTable(){
         +'<td>'+item.category+'</td>'
         +'<td>'+item.quantity+'</td>'
         +'<td>$'+item.price+'</td>'
-        +'<td><button class=id="modify-btn" data-id="'+item.id+'">Modify</button><button id="delete-btn" data-id="'+item.id+'">Delete</button></td>';
+        +'<td><button class="btn btn-sm btn-outline-primary" id="modify-btn" data-id="'+item.id+'">Modify</button><button class="btn btn-sm btn-outline-danger" id="delete-btn" data-id="'+item.id+'">Delete</button></td>';
       tBody.appendChild(row);
     });
   };
@@ -53,7 +53,7 @@ let categoryInput = document.getElementById("material-category");
 let quantityInput = document.getElementById("material-quantity");
 let priceInput = document.getElementById("material-price");
 
-
+/*
 dev notes - fetch is a built-in function provided by the web browser
 but it doesn't automatically give back the data so it can load properly.
 It hands back a Promise. The .then() is a method that runs once the file comes back.
