@@ -70,6 +70,13 @@ nav a {
     padding: 1.5rem 1rem;
     font-size: 0.96rem;
 }
+
+/* Material Management */
+.table-header {
+    padding-top: 1rem;
+}
+
+
 /* Conference Gallery */
 .conference-photo {
   display: block;
