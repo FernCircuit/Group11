@@ -21,17 +21,23 @@ fetch('materials.json') //this sends request to grab the json file
         +'<td><button class="delete-btn">Delete</button></td>';
       tableBody.appendChild(row);
 
-let name = document.getElementById("material-name");
+    });
+  })
+.catch(function(error){
+  console.error('Something went wrong: ', error);
+});
+/*let name = document.getElementById("material-name");
 let category = document.getElementById("material-category");
 let quantity = document.getELementById("material-quantity");
 let price = document.getElementById("material-price");
+*/
 
+/* dev notes - fetch is a built-in function provided by the web browser
+but it doesn't automatically give back the data so it can load properly.
+It hands back a Promise. The .then() is a method that runs once the file comes back.
+.then() methods are sequential, happening in the order they appear
 
-
-
-
-
-/* FORM COPY FROM MATERIALS.HTML, FOR REFERENCE
+FORM COPY FROM MATERIALS.HTML, FOR REFERENCE
 <form>
       <fieldset>
             <div class="form-item mb-3">
