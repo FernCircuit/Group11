@@ -1,0 +1,72 @@
+[
+	{
+		"id": "MAT-001",
+		"name": "Folding Chairs",
+		"category": "Furniture",
+		"quantity": 120,
+		"price": 18.00  
+	},
+	{
+		"id": "MAT-002",
+		"name": "Conference Tables",
+		"category": "Furniture",
+		"quantity": 120,
+		"price": 18.00  
+	},
+	{
+		"id": "MAT-003",
+		"name": "Wireless Microphones",
+		"category": "Audio Equipment",
+		"quantity": 12,
+		"price": 48.99  
+	},
+	{
+		"id": "MAT-004",
+		"name": "Podium",
+		"category": "Furniture",
+		"quantity": 3,
+		"price": 140.00  
+	},
+	{
+		"id": "MAT-005",
+		"name": "Projector Screens",
+		"category": "Presentation Equipment",
+		"quantity": 6,
+		"price": 72.50  
+	},
+	{
+		"id": "MAT-006",
+		"name": "Name Badge Holders",
+		"category": "Registration Supplies",
+		"quantity": 250,
+		"price": 0.45  
+	},	
+		{
+		"id": "MAT-007",
+		"name": "Extension Cords",
+		"category": "Electrical",
+		"quantity": 18,
+		"price": 12.99  
+	},
+		{
+		"id": "MAT-008",
+		"name": "Directional Sign Stands",
+		"category": "Signage",
+		"quantity": 10,
+		"price": 21.00  
+	},
+		{
+		"id": "MAT-009",
+		"name": "Tablecloths",
+		"category": "Linens",
+		"quantity": 30,
+		"price": 16.75  
+	},
+	{
+		"id": "MAT-010",
+		"name": "Flip Charts",
+		"category": "Presentation Supplies",
+		"quantity": 8,
+		"price": 25.00
+	}
+]
