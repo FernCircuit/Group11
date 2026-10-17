@@ -17,8 +17,8 @@ fetch('materials.json') //this sends request to grab the json file
         +'<td>'+material.category+'</td>'
         +'<td>'+material.quantity+'</td>'
         +'<td>'+material.price+'</td>'
-        +'<td><button class="modify-btn">Modify</button></td>'
-        +'<td><button class="delete-btn">Delete</button></td>';
+        +'<td><button class="modify-btn">Modify</button>'
+        +'<button class="delete-btn">Delete</button></td>';
       tableBody.appendChild(row);
 
     });
