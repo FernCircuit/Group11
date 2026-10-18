@@ -49,9 +49,15 @@ function deleteMaterial(materialId){
   //confirm() - built in browser engine command. triggers small popup and freezes execution
   //let confirmDelete - OK saves the user's preference to true; CANCEL assigns false
   let confirmDelete = confirm(`You are deleting item MAT-${materialId}? Are you sure? This cannot be undone.`); //trying backticks ` vs +
-  if(!confirmDelete){ //looks for FALSE
-    return; //stops the function from continuing
+  if(!confirmDelete){ return; }
+
+  //debugging
+  console.log("Starting delete...");
+  console.log("ID passed into function:",materialId,"Type:",typeof materialId);
+  if(allMaterials.length >0){
+    console.log("First item in array ID:",allMaterials[0].id,"Type:", typeof allMaterials[0].id);
   }
+  
   let targetItem = Number(materialId); //built in js function converts the string to a number
   allMaterials = allMaterials.filter(function(item){ //this function filters out the target item and updates the entire list
     return item.id !== targetItem; //returns every item except the targetItem
@@ -163,6 +169,8 @@ document.getElementById('material-table-body').addEventListener('click', functio
     deleteMaterial(materialId); 
   }
 }); 
+
+
 
 
 /*
