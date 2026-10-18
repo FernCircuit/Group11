@@ -81,7 +81,8 @@ nav a {
     width:auto;
 }
 #material-table-body{
-    min-height:400px;
+    min-height:960px;
+    height:auto;
     display:table-row-group;
 }
 table.table{
