@@ -1,24 +1,27 @@
 //FETCH THE JSON FILE & CHECK LOCALSTORAGE--------------------------------------------
 let allMaterials = []; //array to store list of materials
-let savedList = localStorage.getItem('SummitPointInventory');
-if (savedList){
-  allMaterials = JSON.parse(savedList);
-  loadTable();
-}else{
-fetch('materials.json') //this sends request to grab the json file
-  .then(function(incomingFile) { //implements function once the file arrives
-    return incomingFile.json(); //this returns the ready to use data. json() parses the data to readable format
-  })
-//PREPARE THE DATA METHOD------------------------------------------------------------
-  .then(function(cleanData){ //now take the data and format it for entry
-    allMaterials = cleanData; //fill array with clean json data
-    localStorage.setItem('SummitPointInventory', JSON.stringify(allMaterials));
-    loadTable();
-  })
-.catch(function(error){ //report error if something didn't load properly
-  console.error('Inventory could not be loaded: ', error);
-});
+async function getInventory(){
+  try{
+    const savedList = localStorage.getItem('SummitPointInventory');
+    if (savedList){
+      allMaterials = JSON.parse(savedList); //if the item is already in localStorage, then save to allMaterials array
+      loadTable(); //add to the table
+    }else{
+      const response = await fetch('materials.json');
+      if(!response.ok){
+        throw new Error(`Could not load file: ${response.status}`);//couldn't get from localStorage
+      }
+      const cleanData = await response.json();
+      allMaterials = cleanData; //fill array with clean json data
+      localStorage.setItem('SummitPointInventory', JSON.stringify(allMaterials));
+      loadTable();
+    }
+  }catch(error){
+    console.error('Inventory could not be loaded: ', error);
+    }
 }
+getInventory();
+        
 
 //LOAD THE TABLE FUNCTION------------------------------------------------------------
 //this function also refreshes when delete, add, and modify are done
@@ -29,13 +32,13 @@ function loadTable(){
       let row = document.createElement('tr');
       let formatId = ("00"+item.id).slice(-3); //this formats the id to only 3 digits beginning in 00
       row.setAttribute('data-id', item.id);
-      row.innerHTML = '<td>MAT-'+item.id+'</td>'
-        +'<td class="isEditable">'+item.name+'</td>'
-        +'<td class="isEditable">'+item.category+'</td>'
-        +'<td class="isEditable">'+item.quantity+'</td>'
-        +'<td class="isEditable">$'+item.price+'</td>'
-        +'<td><button class="btn btn-sm btn-outline-primary modify-btn" id="modify-btn" data-id="'+item.id+'">Modify</button>'
-        +'<button class="btn btn-sm btn-outline-danger delete-btn" id="delete-btn" data-id="'+item.id+'">Delete</button></td>';
+      row.innerHTML = `<td>MAT-${formatId}</td>
+        <td class="isEditable">${item.name}</td>
+        <td class="isEditable">${item.category}</td>
+        <td class="isEditable">${item.quantity}</td>
+        <td class="isEditable">$${item.price}</td>
+        <td><button class="btn btn-sm btn-outline-primary modify-btn" data-id="${item.id}">Modify</button>
+        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${item.id}">Delete</button></td>`;
       tBody.appendChild(row);
     });
   };
@@ -80,7 +83,8 @@ function modifyMaterial(materialId, button){
       item.name = editableCells[0].textContent; //these lines are saving the new text to the JSON variables
       item.category = editableCells[1].textContent;
       item.quantity = Number(editableCells[2].textContent);
-      item.price = Number(editableCells[3].textContent);
+      let cleanPrice = editableCells[3].textContent.replace('\$','').trim();
+      item.price = Number(cleanPrice);
       localStorage.setItem('SummitPointInventory', JSON.stringify(allMaterials)); //update the list in localStorage
     }
     loadTable(); //reload the table to show changes
