@@ -102,21 +102,28 @@
 <!---- jQuery ------>
     <script>
     $(document).ready(function () {
-        $("#materil-search").on("input", function () {
+        $("#material-search").on("input", function () {
             let keyword = $ (this).val().toLowerCase().trim();
-            let rows = $("#material-table-body tr");
-            let matchingRows = 0
-            rows.each(function () {
-                let rowText = $ (this).text().toLowerCase();
-                let matches = rowtext.includes(keyword);
-                $(this).toggle(matches);
-                if (matches) {matchingRows++;}
+            let visibleCount = 0;
+            $("#material-table tbody tr").each(function () {
+                let rowText = $ 
+            (this).text().toLowerCase();
+                if (rowText.includes(searchText)) {
+                    $(this).show();
+                    visibleCount++;
+                } else {
+                    $(this).hide();
+                }
             });
-            $("#material-result-count").text("Results: " + matchingRows);
-            $("#material-no-results").prop("hidden",matchingRows !== 0);
+
+            $("material-result-count").text("Results: "+ visibleCount);
+            if (visibleCount === 0) {
+                $("#material-no-results").prop("hidden", false);
+            } else {
+                $("#material-no-results").prop("hidden",true);
+            }
         });
     });
-
         
     </script>
 </body>
