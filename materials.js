@@ -102,6 +102,32 @@ document.getElementById('material-table-body').addEventListener('click', functio
   }
 
 
+<!---- jQuery ------>
+
+$(document).ready(function () {
+    $("#material-search").on("input", function () {
+        let keyword = $ (this).val().toLowerCase().trim();
+        let visibleCount = 0;
+        $("#material-table tbody tr").each(function () {
+            let rowText = $(this).text().toLowerCase();
+              if (rowText.includes(searchText)) {
+                    $(this).show();
+                    visibleCount++;
+              } else {
+                  $(this).hide();
+              }
+        });
+
+        $("material-result-count").text("Results: "+ visibleCount);
+        if (visibleCount === 0) {
+             $("#material-no-results").prop("hidden", false);
+        } else {
+            $("#material-no-results").prop("hidden",true);
+        }
+    });
+});
+        
+
 /*
 dev notes - fetch is a built-in function provided by the web browser
 but it doesn't automatically give back the data so it can load properly.
