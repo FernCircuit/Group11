@@ -1,6 +1,6 @@
 //JQUERY SEARCH FUNCTION
 $(document).ready(function(){
-    //SEARCH
+    //search filter
     $('#material-search').on('keyup', function(){
         var value=$(this).val().toLowerCase();
         $('table tbody tr').filter(function(){
@@ -9,9 +9,11 @@ $(document).ready(function(){
     });
 
     //sort ascending
-    $('.table-header').on('click', '.icon-button:has(img[src*="arrow_up"])', function(){
-        var rows=$('table tbody tr').get();
-        rows.sort(function(a,b){
+    $('.table-header').on('click', '.icon-button', function(){
+        var $button = $(this);
+        if($button.find('img[src*="arrow_up"]').length > 0) {
+            var rows=$('table tbody tr').get();
+            rows.sort(function(a,b){
             var keyA = $(a).text().toLowerCase();
             var keyB = $(b).text().toLowerCase();
             return keyA.localeCompare(keyB);
@@ -20,6 +22,7 @@ $(document).ready(function(){
         $.each(rows,function(index,row){
             $('table tbody').append(row);
         });
+        }
     });
     // sort descending
     $('.table-header').on('click', '.sort-down',function(){
