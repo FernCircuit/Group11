@@ -99,33 +99,6 @@
         <p>&copy; 2026 SummitPoint. All rights reserved.</p>
     </section>
 
-<!---- jQuery ------>
-    <script>
-    $(document).ready(function () {
-        $("#material-search").on("input", function () {
-            let keyword = $ (this).val().toLowerCase().trim();
-            let visibleCount = 0;
-            $("#material-table tbody tr").each(function () {
-                let rowText = $ 
-            (this).text().toLowerCase();
-                if (rowText.includes(searchText)) {
-                    $(this).show();
-                    visibleCount++;
-                } else {
-                    $(this).hide();
-                }
-            });
-
-            $("material-result-count").text("Results: "+ visibleCount);
-            if (visibleCount === 0) {
-                $("#material-no-results").prop("hidden", false);
-            } else {
-                $("#material-no-results").prop("hidden",true);
-            }
-        });
-    });
-        
-    </script>
 </body>
 
 </html>
