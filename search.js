@@ -1,9 +1,5 @@
 //JQUERY SEARCH FUNCTION
 $(document).ready(function(){
-    //nice transition so it's not so jerky
-    $('table tbody').on('mouseenter', 'tr', function(){
-        $(this).css('transition','all 0.25s ease-in-out');
-    });
     //search filter
     $('#material-search').on('input keyup', function(event){
         event.preventDefault();
@@ -14,22 +10,17 @@ $(document).ready(function(){
             var nameText = $row.find('td:nth-child(2)').text().toLowerCase();
             var categoryText = $row.find('td:nth-child(3)').text().toLowerCase();
             var matchFound = (nameText.indexOf(value) > -1 || categoryText.indexOf(value) > -1);
+            
             if(matchFound){
-                $row.css({
-                    'opacity':'1',
-                    'display':'table-row'
-                });
+                $row.show();
             }else{
-                $row.css({
-                    'opacity':'0',
-                    'display':'none'
-                });
+                $row.hide();
             }
         });
     });
            
     //sort ascending
-    $('.table-header').on('click', '.icon-button', function(){
+    $('.table-header').on('click', '.icon-button', function(event){
         var $button = $(this);
         if($button.find('img[src*="arrow_up"]').length > 0) {
             var rows=$('table tbody tr').get();
@@ -45,7 +36,7 @@ $(document).ready(function(){
      }
  });
     // sort descending
-    $('.table-header').on('click', '.icon-button',function(){
+    $('.table-header').on('click', '.icon-button',function(event){
         event.preventDefault();
         var $button = $(this);
         if($button.find('img[src*="arrow_down"]').length > 0){
