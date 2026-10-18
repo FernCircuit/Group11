@@ -80,6 +80,12 @@ nav a {
     vertical-align: middle;
     width:auto;
 }
+#material-table-body{
+    min-height:400px;
+    display:table-row-group;
+}
+table.table{
+    min-height:450px;
 .icon-button{
     display:inline-block;
     vertical-align:middle;
