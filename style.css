@@ -80,15 +80,15 @@ nav a {
     vertical-align: middle;
     width:auto;
 }
-#material-table{
+.material-table{
     min-height:600px;
-    overflow-y:auto;
+    height:auto;
+}
 #material-table-body{
     height:auto;
-    display:table-row-group;
 }
 table.table{
-    min-height:960px;
+    min-height:auto;
 }
 .icon-button{
     display:inline-block;
