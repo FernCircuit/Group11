@@ -34,8 +34,8 @@ $(document).ready(function(){
         if($button.find('img[src*="arrow_up"]').length > 0) {
             var rows=$('table tbody tr').get();
             rows.sort(function(a,b){
-                var keyA = $(a).text().toLowerCase();
-                var keyB = $(b).text().toLowerCase();
+                var keyA = $(a).find('td:nth-child(2)').text().toLowerCase();
+                var keyB = $(b).find('td:nth-child(2)').text().toLowerCase();
                 return keyA.localeCompare(keyB);
             });
 
