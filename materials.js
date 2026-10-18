@@ -27,6 +27,7 @@ function loadTable(){
     tBody.innerHTML=''; //clears out the entire table. This is required so the table can be refreshed with new items
     allMaterials.forEach(function(item){
       let row = document.createElement('tr');
+      let formatId = ("00"+item.id).slice(-3); //this formats the id to only 3 digits beginning in 00
       row.setAttribute('data-id', item.id);
       row.innerHTML = '<td>MAT-'+item.id+'</td>'
         +'<td class="isEditable">'+item.name+'</td>'
