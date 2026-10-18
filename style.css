@@ -139,7 +139,7 @@ position:relative;
   margin-bottom: 0; 
 }
 /* css for editable regions via javascript */
-.isEditable {
+.isEditable, table, tbody {
   background-color: #ffffff !important;
   border: 1px solid #cbd5e1 !important;
   border-radius: 4px !important;
