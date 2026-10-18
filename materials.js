@@ -110,7 +110,7 @@ $(document).ready(function () {
         let visibleCount = 0;
         $("#material-table tbody tr").each(function () {
             let rowText = $(this).text().toLowerCase();
-              if (rowText.includes(searchText)) {
+              if (rowText.includes(keyword)) {
                     $(this).show();
                     visibleCount++;
               } else {
@@ -118,11 +118,11 @@ $(document).ready(function () {
               }
         });
 
-        $("material-result-count").text("Results: "+ visibleCount);
+        $("material-result-count").text("Results: " + visibleCount);
         if (visibleCount === 0) {
              $("#material-no-results").prop("hidden", false);
         } else {
-            $("#material-no-results").prop("hidden",true);
+            $("#material-no-results").prop("hidden", true);
         }
     });
 });
