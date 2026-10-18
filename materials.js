@@ -25,12 +25,14 @@ function loadTable(){
     tBody.innerHTML=''; //clears out the entire table. This is required so the table can be refreshed with new items
     allMaterials.forEach(function(item){
       let row = document.createElement('tr');
+      row.setAttribute('data-id', item.id);
       row.innerHTML = '<td>MAT-'+item.id+'</td>'
-        +'<td>'+item.name+'</td>'
-        +'<td>'+item.category+'</td>'
-        +'<td>'+item.quantity+'</td>'
-        +'<td>$'+item.price+'</td>'
-        +'<td><button class="btn btn-sm btn-outline-primary" id="modify-btn" data-id="'+item.id+'">Modify</button><button class="btn btn-sm btn-outline-danger" id="delete-btn" data-id="'+item.id+'">Delete</button></td>';
+        +'<td class="isEditable">'+item.name+'</td>'
+        +'<td class="isEditable">'+item.category+'</td>'
+        +'<td class="isEditable">'+item.quantity+'</td>'
+        +'<td class="isEditable">$'+item.price+'</td>'
+        +'<td><button class="btn btn-sm btn-outline-primary modify-btn" id="modify-btn" data-id="'+item.id+'">Modify</button>
+        <button class="btn btn-sm btn-outline-danger delete-btn" id="delete-btn" data-id="'+item.id+'">Delete</button></td>';
       tBody.appendChild(row);
     });
   };
@@ -82,11 +84,23 @@ function modifyMaterial(materialId, button){
   }
 }
 
-
+/*
 let nameInput = document.getElementById("material-name");
 let categoryInput = document.getElementById("material-category");
 let quantityInput = document.getElementById("material-quantity");
 let priceInput = document.getElementById("material-price");
+*/
+document.getElementById('material-table-body').addEventListener('click', function(event){
+  let row = event.target.closest('tr');
+  if(!row) { return; }
+  let materialId = row.getAttribute('data-id');
+  if(event.target.classList.contains('modify-btn')){
+    modifyMaterial(materialId, event.target);
+  }
+  if(event.target.classList.contains('delete-btn')){
+    deleteMaterial(materialId);
+  }
+
 
 /*
 dev notes - fetch is a built-in function provided by the web browser
