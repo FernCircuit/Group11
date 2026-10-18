@@ -62,17 +62,22 @@
                 </form>
             </div>
 
-            <!--TABLE FOR DISPLAYING THE JSON DATA. CONTENTS ARE VISUAL TILL WE GET WORKING JSON DATA FOR THE TABLE-->
             <div class="table-header">
                 <h5>Database</h5>
+            <!-- JQUERY SEARCH -->
                 <p>Search and review conference materials and current stock.</p>
                 <!--Search bar, will need JavaScript/jQuery to work.-->
                 <label class="visually-hidden" for="material-search">Search materials</label>
-                <input class="form-control material-search" type="search" id="material-search"
-                    placeholder="Search by ID, material, or category" autocomplete="off">
+                <input class="form-control material-search" type="search" id="material-search" placeholder="Search by ID, material, or category" autocomplete="off">
+                <button class="icon-button"><img src="icons/filter.svg" alt="filter" class="search-icon"></button>
+                <button class="icon-button"><img src="icons/arrow_down.svg" alt="filter" class="search-icon"></button>
+                <button class="icon-button">
+                    <img src="icons/arrow_up.svg" alt="filter" class="search-icon">
+                </button>
             </div>
             <p class="material-result-count" id="material-result-count" aria-live="polite">Results: 10</p>
             <div class="material-table" tabindex="0" aria-label="Scrollable materials inventory">
+            <!--TABLE FOR DISPLAYING THE JSON DATA. CONTENTS ARE VISUAL TILL WE GET WORKING JSON DATA FOR THE TABLE-->    
                 <table class="table table-striped table-hover align-middle mb-0" id="material-table">
                     <thead class="table-dark">
                         <tr>
