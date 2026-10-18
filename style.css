@@ -75,11 +75,14 @@ nav a {
 .table-header {
     padding-top: 1rem;
 }
-.material-search, .icon-button {
+.material-search{
     display: inline-block;
     vertical-align: middle;
+    width:auto;
 }
 .icon-button{
+    display:inline-block;
+    vertical-align:middle;
     background:none;
     border:none;
     padding:0;
