@@ -151,10 +151,10 @@ document.getElementById('material-table-body').addEventListener('click', functio
   let row = event.target.closest('tr');
   if(!row) { return; }
   let materialId = row.getAttribute('data-id');
-  if(event.target.classList.contains('modify-btn')){
-    modifyMaterial(materialId, event.target); //call the modifyMaterial function
+  if(event.target.closest('.modify-btn')){ //tried .classList.contains here but due to something with bootstrap, .closest is better
+    modifyMaterial(materialId, event.target.closest('.modify-btn')); //call the modifyMaterial function
   }
-  if(event.target.classList.contains('delete-btn')){
+  if(event.target.closest('.delete-btn')){
     deleteMaterial(materialId); 
   }
 }); 
