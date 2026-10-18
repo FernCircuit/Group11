@@ -75,7 +75,10 @@ nav a {
 .table-header {
     padding-top: 1rem;
 }
-
+.material-search, .icon-button {
+    display: inline-block;
+    vertical-align: middle;
+}
 
 /* Conference Gallery */
 .conference-photo {
