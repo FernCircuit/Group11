@@ -139,8 +139,9 @@ position:relative;
   margin-bottom: 0; 
 }
 /* css for editable regions via javascript */
-.isEditable, table, tbody {
+tr.editThis td.isEditable{
   background-color: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  border-radius: 4px !important;
+    --bs-table-bg-type:transparent !important; /*disables the bootstrap overriding the white bg*/
+  outline: 1px solid #cbd5e1 !important;
+  border-radius: 5px !important;
 }
