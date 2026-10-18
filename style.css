@@ -8,6 +8,7 @@ nav {
     gap: 1rem;
     padding: 1rem;
     background: linear-gradient(135deg, #0f172a, #1e293b);
+    position:fixed;
 }
 nav a {
     color: #ececec;
