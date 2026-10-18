@@ -1,69 +1,69 @@
 [
 	{
-		"id": 001,
+		"id": 1,
 		"name": "Folding Chairs",
 		"category": "Furniture",
 		"quantity": 120,
 		"price": 18.00  
 	},
 	{
-		"id": 002,
+		"id": 2,
 		"name": "Conference Tables",
 		"category": "Furniture",
 		"quantity": 120,
 		"price": 18.00  
 	},
 	{
-		"id": 003,
+		"id": 3,
 		"name": "Wireless Microphones",
 		"category": "Audio Equipment",
 		"quantity": 12,
 		"price": 48.99  
 	},
 	{
-		"id": 004,
+		"id": 4,
 		"name": "Podium",
 		"category": "Furniture",
 		"quantity": 3,
 		"price": 140.00  
 	},
 	{
-		"id": 005,
+		"id": 5,
 		"name": "Projector Screens",
 		"category": "Presentation Equipment",
 		"quantity": 6,
 		"price": 72.50  
 	},
 	{
-		"id": 006,
+		"id": 6,
 		"name": "Name Badge Holders",
 		"category": "Registration Supplies",
 		"quantity": 250,
 		"price": 0.45  
 	},	
 		{
-		"id": 007,
+		"id": 7,
 		"name": "Extension Cords",
 		"category": "Electrical",
 		"quantity": 18,
 		"price": 12.99  
 	},
 		{
-		"id": 008,
+		"id": 8,
 		"name": "Directional Sign Stands",
 		"category": "Signage",
 		"quantity": 10,
 		"price": 21.00  
 	},
 		{
-		"id": 009,
+		"id": 9,
 		"name": "Tablecloths",
 		"category": "Linens",
 		"quantity": 30,
 		"price": 16.75  
 	},
 	{
-		"id": 010,
+		"id": 10,
 		"name": "Flip Charts",
 		"category": "Presentation Supplies",
 		"quantity": 8,
