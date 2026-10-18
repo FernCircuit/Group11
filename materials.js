@@ -51,7 +51,7 @@ function deleteMaterial(materialId){
   let confirmDelete = confirm(`You are deleting item MAT-${materialId}? Are you sure? This cannot be undone.`); //trying backticks ` vs +
   if(!confirmDelete){ return; }
 
-  //debugging
+  //debugging - some issues getting to delete
   console.log("Starting delete...");
   console.log("ID passed into function:",materialId,"Type:",typeof materialId);
   if(allMaterials.length >0){
