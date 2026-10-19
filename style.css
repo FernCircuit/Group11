@@ -143,6 +143,7 @@ tr.editThis td.isEditable{
   background-color: #ffffff !important;
     --bs-table-bg-type:transparent !important; /*disables the bootstrap overriding the white bg*/
     --bs-table-hover-bg:transparent !important;/*disables the bootstrap hover effect*/
+    box-sizing:border-box;
   outline: 1px solid #0d6efd !important;
   border-radius: 5px !important;
 }
