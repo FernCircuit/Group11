@@ -147,3 +147,23 @@ tr.editThis td.isEditable{
   outline: 1px solid #0d6efd !important;
   border-radius: 5px !important;
 }
+
+/* Speakers */
+.speakers-content {
+    display: block;
+    padding: 1.5rem;
+}
+.speakers-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+    width: min(100%, 1440px);
+    margin: 0 auto;
+}
+.speakers-layout > * {
+    min-width: 0;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 760px;
+}

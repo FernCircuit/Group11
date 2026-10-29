@@ -1,0 +1,62 @@
+[
+	{
+		"id": 1,
+		"name": "Krishna Castiel",
+		"specialty": "Tech",
+		"price": 99.99 
+	},
+	{
+		"id": 2,
+		"name": "Madara Ferre",
+		"specialty": "Business",
+		"price": 159.99 
+	},
+	{
+		"id": 3,
+		"name": "Pasi Walther",
+		"specialty": "Tech",
+		"price": 79.99
+	},
+	{
+		"id": 4,
+		"name": "Adella Pankaj",
+		"specialty": "Health",
+		"price": 199.99
+	},
+	{
+		"id": 5,
+		"name": "Geoffroy Alex",
+		"specialty": "Health",
+		"price": 99.99 
+	},
+	{
+		"id": 6,
+		"name": "Ezekiel Waverly",
+		"specialty": "Commerce",
+		"price": 49.99
+	},
+	{
+		"id": 7,
+		"name": "Arundhati Kristin",
+		"specialty": "Tech",
+		"price": 259.99
+	},
+	{
+		"id": 8,
+		"name": "Carlie Armandine",
+		"specialty": "Marketing",
+		"price": 89.99
+	},
+	{
+		"id": 9,
+		"name": "Lalia Fiete",
+		"specialty": "Business",
+		"price": 139.99
+	},
+	{
+		"id": 10,
+		"name": "Dougie Vasuda",
+		"specialty": "Commerce",
+		"price": 99.99 
+	}
+]
