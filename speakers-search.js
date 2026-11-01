@@ -1,7 +1,7 @@
 //JQUERY SEARCH FUNCTION
 $(document).ready(function(){
     //search filter
-    $('#material-search').on('input keyup', function(event){
+    $('#speaker-search').on('input keyup', function(event){
         event.preventDefault();
         var value=$(this).val().toLowerCase();
         
