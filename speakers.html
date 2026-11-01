@@ -57,31 +57,19 @@
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Specialty</th>
-                            <th>Price</th>
+                            <th>Hourly Rate</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="speaker-table-body">
-                        <tr>
-                            <td>1</td>
-                            <td>Alex Alexandra</td>
-                            <td>Tech</td>
-                            <td>$99.99</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary" type="button">Add to list</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>John Johnathan</td>
-                            <td>Health</td>
-                            <td>$149.99</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary" type="button">Add to list</button>
-                            </td>
-                        </tr>
+                        <!----------
+                        ------------
+                        JS generate speakers here
+                        ------------
+                        ---------->
                     </tbody>
                 </table>
                 <p class="material-no-results" id="material-no-results" hidden>No materials match your search.</p>
@@ -91,10 +79,10 @@
         <div class="cart bg-white p-4 rounded shadow-sm">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h2 class="mb-1">Speaker list</h2>
-                    <p class="text-muted mb-0">Review your selections before requesting</p>
+                    <h2 class="mb-1">Shopping Cart</h2>
+                    <p class="text-muted mb-0">Review your selections before purchasing</p>
                 </div>
-                <span class="badge text-bg-primary rounded-pill">2 speakers</span>
+                <span id="speaker-count" class="badge text-bg-primary rounded-pill"><!-- count num speakers here--></span>
             </div>
 
             <div class="cart-table-responsive">
@@ -107,27 +95,12 @@
                             <th scope="col"><span class="visually-hidden">Actions</span></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <strong>Alex Alexandra</strong>
-                            </td>
-                            <td>Tech</td>
-                            <td >$99.99</td>
-                            <td class="text-end">
-                                <button class="btn btn-sm btn-outline-danger" type="button">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>John Johnathan</strong>
-                            </td>
-                            <td>Health</td>
-                            <td >$149.99</td>
-                            <td class="text-end">
-                                <button class="btn btn-sm btn-outline-danger" type="button">Remove</button>
-                            </td>
-                        </tr>
+                    <tbody id="cart-table-body">
+                        <!--------------
+                        ----------------
+                        JS adds speakers here (speakers.js)
+                        ----------------
+                        ------------------>
                     </tbody>
                 </table>
             </div>
@@ -136,7 +109,13 @@
                 <div class="col-sm-8 col-md-6 col-lg-5">
                     <div class="d-flex justify-content-between py-2 border-top fs-5 fw-bold">
                         <span>Total</span>
-                        <span>$249.98</span>
+                        <span id="cart-total">
+                            <!-------
+                            --------
+                            Count Total
+                            --------
+                            -------->
+                        </span>
                     </div>
                     <button class="btn btn-primary w-100 mt-2" type="button">Request Speakers</button>
                 </div>
