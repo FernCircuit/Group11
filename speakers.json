@@ -1,62 +1,72 @@
 [
 	{
 		"id": 1,
-		"name": "Krishna Castiel",
+		"firstname": "Krishna",
+		"lastname": "Castiel",
 		"specialty": "Tech",
-		"price": 99.99 
+		"rate": 99.99 
 	},
 	{
 		"id": 2,
-		"name": "Madara Ferre",
+		"firstname": "Madara",
+		"lastname": "Ferre"
 		"specialty": "Business",
-		"price": 159.99 
+		"rate": 159.99 
 	},
 	{
 		"id": 3,
-		"name": "Pasi Walther",
+		"firstname": "Pasi",
+		"lastname":"Walther",
 		"specialty": "Tech",
-		"price": 79.99
+		"rate": 79.99
 	},
 	{
 		"id": 4,
-		"name": "Adella Pankaj",
+		"firstname": "Adella",
+		"lastname": "Pankaj",
 		"specialty": "Health",
-		"price": 199.99
+		"rate": 199.99
 	},
 	{
 		"id": 5,
-		"name": "Geoffroy Alex",
+		"firstname": "Geoffroy",
+		"lastname: "Alex",
 		"specialty": "Health",
-		"price": 99.99 
+		"rate": 99.99 
 	},
 	{
 		"id": 6,
-		"name": "Ezekiel Waverly",
+		"firstname": "Ezekiel",
+		"lastname": "Waverly",
 		"specialty": "Commerce",
-		"price": 49.99
+		"rate": 49.99
 	},
 	{
 		"id": 7,
-		"name": "Arundhati Kristin",
+		"firstname": "Arundhati",
+		"lastname":"Kristin",
 		"specialty": "Tech",
-		"price": 259.99
+		"rate": 259.99
 	},
 	{
 		"id": 8,
-		"name": "Carlie Armandine",
+		"firstname": "Carlie",
+		"lastname": "Armandine",
 		"specialty": "Marketing",
-		"price": 89.99
+		"rate": 89.99
 	},
 	{
 		"id": 9,
-		"name": "Lalia Fiete",
+		"firstname": "Lalia"
+		"lastname": "Fiete",
 		"specialty": "Business",
-		"price": 139.99
+		"rate": 139.99
 	},
 	{
 		"id": 10,
-		"name": "Dougie Vasuda",
+		"firstname": "Dougie",
+		"lastname": "Vasuda",
 		"specialty": "Commerce",
-		"price": 99.99 
+		"rate": 99.99 
 	}
 ]
