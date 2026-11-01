@@ -165,6 +165,15 @@ tr.editThis td.isEditable{
     gap: 1.5rem;
     width: min(100%, 1440px);
     margin: 0 auto;
+    min-height:700px;
+}
+.speakers-layout .card{
+    min-height:600px;
+    display: flex;
+    flex-direction:column;
+}
+.speaker-table-body{
+    min-height:400px;
 }
 .speakers-layout > * {
     min-width: 0;
