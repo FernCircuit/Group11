@@ -63,7 +63,7 @@ function loadTable(){
     <td>${item.lastname}</td>
     <td>${item.specialty}</td>
     <td>$${item.rate}</td>
-    <td><button class="btn btn-sm ${buttonClass} add-btn" ${isDisabled} data-id="${item.id}">Add to Cart</button></td>`;
+    <td><button class="btn btn-sm ${buttonClass} add-btn" ${isDisabled} data-id="${item.id}">${buttonText}</button></td>`;
     tBody.appendChild(row);
     });
   };
@@ -75,11 +75,13 @@ function loadShoppingCart(){
   cart.innerHTML = '';
 
   shoppingCart.forEach(function(item){
+    if(item.deleted){
+      return;
+    }
     let row = document.createElement('tr');
     let formatId = ("00"+item.id).slice(-3); //this formats the id to only 3 digits beginning in 00
     row.setAttribute('data-id', item.id);
 
-    let rowClass = item.deleted ? "row-deleted" : "";
     let buttonText = item.deleted ? "Undo" : "Delete";
     let buttonClass = item.deleted ? "btn-warning" : "btn-outline-danger";
 
