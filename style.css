@@ -2,6 +2,11 @@
 I decided to create a separate CSS file to stay organized, but this can change if we feel like it.
 Its a little rough at the moment so I will likely refine in the future.
 */
+body, html{
+    height:100%;
+    margin:0;
+    padding:0;
+}
 nav {
     display: flex;
     justify-content: space-around;
