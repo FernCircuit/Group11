@@ -45,13 +45,26 @@ function loadTable(){
       let row = document.createElement('tr');
       let formatId = ("00"+item.id).slice(-3); //this formats the id to only 3 digits beginning in 00
       row.setAttribute('data-id', item.id);
-      row.innerHTML = `<td>SPK-${formatId}</td>
-        <td class="isEditable">${item.firstname}</td>
-        <td class="isEditable">${item.lastname}</td>
-        <td class="isEditable">${item.specialty}</td>
-        <td class="isEditable">$${item.rate}</td>
-        <td><button class="btn btn-sm btn-outline-primary add-btn" data-id="${item.id}">Add to Cart</button></td>`;
-      tBody.appendChild(row);
+
+      // is the speaker already in the cart:
+      let isAlreadyInCart = false;
+      for(let i=0; i < shoppingCart.length; i++){
+        if(shoppingCart[i].id === item.id && shoppingCart[i].deleted === false){
+          isAlreadyInCart = true;
+          break;
+      }
+    }
+    let buttonText = isAlreadyInCart ? "Added!" : "Add to Cart";
+    let buttonClass = isAlreadyInCart ? "btn-success" : "btn-outline-primary";
+    let isDisabled = isAlreadyInCart ? "disabled" : "";
+  
+    row.innerHTML = `<td>SPK-${formatId}</td>
+    <td class="isEditable">${item.firstname}</td>
+    <td class="isEditable">${item.lastname}</td>
+    <td class="isEditable">${item.specialty}</td>
+    <td class="isEditable">$${item.rate}</td>
+    <td><button class="btn btn-sm ${buttonClass} add-btn" ${isDisabled} data-id="${item.id}">Add to Cart</button></td>`;
+    tBody.appendChild(row);
     });
   };
 
@@ -114,6 +127,7 @@ function addSpeaker(speakerId){
     }
       localStorage.setItem('SummitPointCart', JSON.stringify(shoppingCart));
       loadShoppingCart();
+      loadTable();
   }
   
 //TOGGLE DELETE/UNDO
@@ -128,6 +142,7 @@ function toggleDeleteCartItem(speakerId){
   });
   localStorage.setItem('SummitPointCart', JSON.stringify(shoppingCart));
   loadShoppingCart();
+  loadTable();
 }
 
 //EVENT LISTENERS ----------------------------------------------------------
