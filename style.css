@@ -84,7 +84,7 @@ nav a {
     min-height:600px;
     height:auto;
 }
-#material-table-body{
+#material-table-body, #speaker-table-body{
     height:auto;
 }
 table.table{
