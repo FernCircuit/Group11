@@ -18,7 +18,7 @@ async function getData(){
         throw new Error(`Could not load file: ${response.status}`);//couldn't get from localStorage
       }
       allSpeakers = await response.json();
-      localStorage.setItem('SummitPointSpeakers',JSON.strigify(allSpeakers));
+      localStorage.setItem('SummitPointSpeakers',JSON.stringify(allSpeakers));
     }
       // now load the new shopping cart if one already saved to localStorage
       if(savedCart){
@@ -134,18 +134,19 @@ function toggleDeleteCartItem(speakerId){
 
 //EVENT LISTENERS ----------------------------------------------------------
     //add speaker to cart
-document.querySelector('speaker-table-body').addEventListener('submit', function(event){
+document.getElementById('speaker-table-body').addEventListener('click', function(event){
   let row = event.target.closest('tr');
   if(!row) { return; }
   let speakerId = row.getAttribute('data-id');
-  if(event.target.closes('.add-btn')){
+  if(event.target.closest('.add-btn')){
   addSpeaker(speakerId);
+  }
 });
     //toggle delete/undo button
 document.getElementById('cart-table-body').addEventListener('click', function(event){
   let row = event.target.closest('tr');
   if(!row) { return; }
-  let SpeakerId = row.getAttribute('data-id');
+  let speakerId = row.getAttribute('data-id');
   if(event.target.closest('.toggle-cart-delete-btn')){ //tried .classList.contains here but due to something with bootstrap, .closest is better
      toggleDeleteCartItem(speakerId);
   }
