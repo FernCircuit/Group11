@@ -74,9 +74,7 @@ function loadShoppingCart(){
       row.classList.add('row-deleted');
     }
     row.innerHTML = `<td>SPK-${formatId}</td>
-    <td>${item.firstname}</td>
-    <td>${item.lastname}</td>
-    <td>${item.specialty}</td>
+    <td>${item.firstname} ${item.lastname}</td>
     <td>${item.rate}</td>
     <td><button class="btn btn-sm ${buttonClass} toggle-cart-delete-btn">${buttonText}</button></td>`;
     cart.appendChild(row);
