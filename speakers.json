@@ -9,7 +9,7 @@
 	{
 		"id": 2,
 		"firstname": "Madara",
-		"lastname": "Ferre"
+		"lastname": "Ferre",
 		"specialty": "Business",
 		"rate": 159.99 
 	},
@@ -30,7 +30,7 @@
 	{
 		"id": 5,
 		"firstname": "Geoffroy",
-		"lastname: "Alex",
+		"lastname": "Alex",
 		"specialty": "Health",
 		"rate": 99.99 
 	},
@@ -57,7 +57,7 @@
 	},
 	{
 		"id": 9,
-		"firstname": "Lalia"
+		"firstname": "Lalia",
 		"lastname": "Fiete",
 		"specialty": "Business",
 		"rate": 139.99
