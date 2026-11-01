@@ -77,7 +77,7 @@ function loadShoppingCart(){
     <td>${item.firstname}</td>
     <td>${item.lastname}</td>
     <td>${item.specialty}</td>
-    <td>${item.price}</td>
+    <td>${item.rate}</td>
     <td><button class="btn btn-sm ${buttonClass} toggle-cart-delete-btn">${buttonText}</button></td>`;
     cart.appendChild(row);
   });
