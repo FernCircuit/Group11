@@ -59,10 +59,10 @@ function loadTable(){
     let isDisabled = isAlreadyInCart ? "disabled" : "";
   
     row.innerHTML = `<td>SPK-${formatId}</td>
-    <td class="isEditable">${item.firstname}</td>
-    <td class="isEditable">${item.lastname}</td>
-    <td class="isEditable">${item.specialty}</td>
-    <td class="isEditable">$${item.rate}</td>
+    <td>${item.firstname}</td>
+    <td>${item.lastname}</td>
+    <td>${item.specialty}</td>
+    <td>$${item.rate}</td>
     <td><button class="btn btn-sm ${buttonClass} add-btn" ${isDisabled} data-id="${item.id}">Add to Cart</button></td>`;
     tBody.appendChild(row);
     });
