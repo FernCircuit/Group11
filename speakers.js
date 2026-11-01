@@ -68,7 +68,7 @@ function loadTable(){
     });
   };
 
-//LOAD THE SHOPPING CART
+//LOAD THE SHOPPING CART-----------------------------------------------
 function loadShoppingCart(){
   let cart = document.getElementById('cart-table-body');
   if(!cart) { return; }
@@ -84,10 +84,7 @@ function loadShoppingCart(){
 
     let buttonText = item.deleted ? "Undo" : "Delete";
     let buttonClass = item.deleted ? "btn-warning" : "btn-outline-danger";
-
-    if(item.deleted){
-      row.classList.add('row-deleted');
-    }
+    
     row.innerHTML = `<td>SPK-${formatId}</td>
     <td>${item.firstname} ${item.lastname}</td>
     <td>${item.rate}</td>
