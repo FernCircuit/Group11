@@ -49,7 +49,7 @@ function loadTable(){
       // is the speaker already in the cart:
       let isAlreadyInCart = false;
       for(let i=0; i < shoppingCart.length; i++){
-        if(shoppingCart[i].id === item.id && shoppingCart[i].deleted === false){
+        if(shoppingCart[i].id === item.id){
           isAlreadyInCart = true;
           break;
       }
@@ -75,15 +75,12 @@ function loadShoppingCart(){
   cart.innerHTML = '';
 
   shoppingCart.forEach(function(item){
-    if(item.deleted){
-      return;
-    }
     let row = document.createElement('tr');
     let formatId = ("00"+item.id).slice(-3); //this formats the id to only 3 digits beginning in 00
     row.setAttribute('data-id', item.id);
 
-    let buttonText = item.deleted ? "Undo" : "Delete";
-    let buttonClass = item.deleted ? "btn-warning" : "btn-outline-danger";
+    let buttonText = "Delete";
+    let buttonClass = "btn-outline-danger";
     
     row.innerHTML = `<td>SPK-${formatId}</td>
     <td>${item.firstname} ${item.lastname}</td>
@@ -93,7 +90,7 @@ function loadShoppingCart(){
   });
 }
 
-//ADD SPEAKER TO CART
+//ADD SPEAKER TO CART---------------------------------------------
 function addSpeaker(speakerId){
   let targetId = Number(speakerId);
   let existingCartItem = null;
@@ -103,27 +100,21 @@ function addSpeaker(speakerId){
       break;
     }
   }
+  //blocks duplicate entries
     if(existingCartItem !== null){
-      if(existingCartItem.deleted === true){
-        existingCartItem.deleted = false;
-      }else{
-      alert("Speaker is already in shopping cart!");
-      return;
-    }
-  }else{
-    let speakerMatch = null;
-      for (let j=0;j<allSpeakers.length; j++){
-        if(allSpeakers[j].id ===targetId){
+        alert("Speaker already added to cart!");
+        return;
+      }
+      let speakerMatch = null;
+      for(let j=0; j < allSpeakers.length; j++){
+        if(allSpeakers[j].id === targetId){            
           speakerMatch = allSpeakers[j];
           break;
+          }
         }
+        if(speakerMatch !== null){
+        shoppingCart.push(speakerMatch);
       }
-        
-    if(speakerMatch !== null){
-      speakerMatch.deleted = false;
-      shoppingCart.push(speakerMatch);
-      }
-    }
       localStorage.setItem('SummitPointCart', JSON.stringify(shoppingCart));
       loadShoppingCart();
       loadTable();
@@ -132,17 +123,46 @@ function addSpeaker(speakerId){
 //TOGGLE DELETE/UNDO
 function toggleDeleteCartItem(speakerId){
   let targetId = Number(speakerId);
-
-  shoppingCart = shoppingCart.map(function(item){
-    if(item.id === targetId){
-      item.deleted = !item.deleted;
-    }
-    return item;
+  shoppingCart = shoppingCart.filter(function(item){
+    return item.id !== targetId;
   });
   localStorage.setItem('SummitPointCart', JSON.stringify(shoppingCart));
   loadShoppingCart();
   loadTable();
 }
+
+//AJAX TO RESTFUL API -------------------------------------------------------
+async function checkout(){
+  if (shoppingCart.length === 0){
+    alert("Cart is empty");
+    return;
+  }
+
+  const formatCart = {
+    "sendDate": new Date().toISOString(),
+    "numItems": shoppingCart.length,
+    "items": shoppingCart.map(function(item){
+      return{
+        "id": item.id,
+        "name": `${item.firstname} ${item.lastname}`,
+        "rate": Number(item.rate)
+      };
+    })
+  };
+
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener("load", function(){
+    if(xhr.status >= 200 && xhr.status < 300){
+      alert("Success! Cart layout processed");
+    }else{
+      console.error("Transmission Error: ", xhr.status);
+    }
+  });
+  xhr.open("POST", "https://ferncircuit.github.io/");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify(formatCart));
+}
+    
 
 //EVENT LISTENERS ----------------------------------------------------------
     //add speaker to cart
