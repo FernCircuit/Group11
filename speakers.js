@@ -161,6 +161,7 @@ async function checkout(){
   if(checkoutBtn){
     checkoutBtn.innerText = "Sent!"; //change text to sent
     checkoutBtn.className = "btn btn-success"; //bootstrap turns button green
+  }
   //create new XMLHttpRequest
   const xhr = new XMLHttpRequest();
   //this is what happens when the request loads (KEEP FOR NEXT PART - FINALIZE PAGE)
@@ -186,7 +187,6 @@ async function checkout(){
   xhr.setRequestHeader("Content-Type", "application/json");
   //send the JSON to backend
   xhr.send(JSON.stringify(formatCart));
-
 */
 }
     
