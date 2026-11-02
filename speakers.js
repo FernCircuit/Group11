@@ -156,11 +156,16 @@ async function checkout(){
       };
     })
   };
+  //change checkout button text (KEEP FOR NEXT PART - FINALIZE PAGE)
+  const checkoutBtn = document.getElementById('checkout-btn');
+  if(checkoutBtn){
+    checkoutBtn.innerText = "Sent!"; //change text to sent
+    checkoutBtn.className = "btn btn-success"; //bootstrap turns button green
   //create new XMLHttpRequest
   const xhr = new XMLHttpRequest();
-  //this is what happens when the request loads
+  //this is what happens when the request loads (KEEP FOR NEXT PART - FINALIZE PAGE)
   xhr.addEventListener("load", function(){
-    //check for successful http codes 200 OK (200-299)
+    //check for successful http codes 200 OK (200-299) - good practice!
     if(xhr.status >= 200 && xhr.status < 300){
       alert("Success! Cart layout processed");
       //clear out the cart, localStorage, and refresh tables:
@@ -169,11 +174,12 @@ async function checkout(){
       loadShoppingCart();
       loadTable();
       //now, redirect to checkout form
-      window.location.href = "checkout.html";
+      //window.location.href = "checkout.html"; (KEEP FOR NEXT PART)
     }else{
       console.error("Transmission Error: ", xhr.status); //else print error
     }
   });
+  /* (COMMENTED OUT FOR NOW) (NEEDED FOR NEXT PART)
   //contains necessary data to send the form to backend (POST)
   xhr.open("POST", "https://ferncircuit.github.io/checkout");
   //formats the http header:
@@ -181,6 +187,7 @@ async function checkout(){
   //send the JSON to backend
   xhr.send(JSON.stringify(formatCart));
 }
+*/
     
 //EVENT LISTENERS ----------------------------------------------------------
     //add speaker to cart
