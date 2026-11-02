@@ -1,37 +1,36 @@
 
 //FETCH THE JSON FILE & CHECK LOCALSTORAGE--------------------------------------------
+//Create arrays to hold speaker list and shopping cart:
 let allSpeakers = []; //array to store list of speakers to choose
 let shoppingCart = []; //create a separate array to store cart items
-
-//this function loads the tables
-async function getData(){
+//Main function loads the tables
+async function getData(){ //async declares function will run in the background
   try{
+    //check if there is a localStorage list in the user's cache
     const savedList = localStorage.getItem('SummitPointSpeakers');
     const savedCart = localStorage.getItem('SummitPointCart');
-
     // this loads the current localStorage records for speakers
-    if (savedList){
+    if (savedList){ 
       allSpeakers = JSON.parse(savedList); //if the record is already in localStorage, then save to allSpeakers array
     }else{
-      const response = await fetch('speakers.json');
-      if(!response.ok){
+      const response = await fetch('speakers.json'); //if not, look for the stored json file
+      if(!response.ok){ //error response
         throw new Error(`Could not load file: ${response.status}`);//couldn't get from localStorage
       }
-      allSpeakers = await response.json();
-      localStorage.setItem('SummitPointSpeakers',JSON.stringify(allSpeakers));
+      allSpeakers = await response.json(); //await pauses js until it receives the file
+      localStorage.setItem('SummitPointSpeakers',JSON.stringify(allSpeakers)); //JSON stringify
     }
       // now load the new shopping cart if one already saved to localStorage
       if(savedCart){
         shoppingCart = JSON.parse(savedCart);
       }
-
-      loadTable();
-      loadShoppingCart();
-  }catch(error){
+      loadTable(); //call loadTable() to refresh the table
+      loadShoppingCart(); //refresh the shopping cart
+  }catch(error){ //error call
     console.error('Speakers could not be loaded: ', error);
     }
 }
-getData();
+getData();//calls the main function above which loads from other functions below
         
 
 //LOAD THE TABLE FUNCTION------------------------------------------------------------
@@ -45,8 +44,7 @@ function loadTable(){
       let row = document.createElement('tr');
       let formatId = ("00"+item.id).slice(-3); //this formats the id to only 3 digits beginning in 00
       row.setAttribute('data-id', item.id);
-
-      // is the speaker already in the cart:
+      // is the speaker already in the cart?
       let isAlreadyInCart = false;
       for(let i=0; i < shoppingCart.length; i++){
         if(shoppingCart[i].id === item.id){
@@ -54,10 +52,11 @@ function loadTable(){
           break;
       }
     }
+    //assigns the text/classes to the button we're toggling
     let buttonText = isAlreadyInCart ? "Added!" : "Add to Cart";
     let buttonClass = isAlreadyInCart ? "btn-success" : "btn-outline-primary";
     let isDisabled = isAlreadyInCart ? "disabled" : "";
-  
+    //print contents
     row.innerHTML = `<td>SPK-${formatId}</td>
     <td>${item.firstname}</td>
     <td>${item.lastname}</td>
@@ -70,18 +69,17 @@ function loadTable(){
 
 //LOAD THE SHOPPING CART-----------------------------------------------
 function loadShoppingCart(){
-  let cart = document.getElementById('cart-table-body');
-  if(!cart) { return; }
-  cart.innerHTML = '';
-
-  shoppingCart.forEach(function(item){
-    let row = document.createElement('tr');
+  let cart = document.getElementById('cart-table-body'); //target the cart table
+  if(!cart) { return; } //if now, leave it
+  cart.innerHTML = ''; //grab the innerHTML rows
+  shoppingCart.forEach(function(item){ //loop to create the shopping cart rows
+    let row = document.createElement('tr'); //create a row
     let formatId = ("00"+item.id).slice(-3); //this formats the id to only 3 digits beginning in 00
     row.setAttribute('data-id', item.id);
-
+    //assign button text and class
     let buttonText = "Delete";
     let buttonClass = "btn-outline-danger";
-    
+    //print results
     row.innerHTML = `<td>SPK-${formatId}</td>
     <td>${item.firstname} ${item.lastname}</td>
     <td>${item.rate}</td>
@@ -94,39 +92,46 @@ function loadShoppingCart(){
 function addSpeaker(speakerId){
   let targetId = Number(speakerId);
   let existingCartItem = null;
+  //check if the speaker already exists in the cart:
   for (let i=0; i < shoppingCart.length; i++){
-    if (shoppingCart[i].id ===targetId){
-      existingCartItem = shoppingCart[i];
+    if (shoppingCart[i].id === targetId){ //match found
+      existingCartItem = shoppingCart[i]; //add to existing list variable
       break;
     }
   }
-  //blocks duplicate entries
+  //this blocks duplicate entries by sending an alert if speaker already in the existing cart list
     if(existingCartItem !== null){
         alert("Speaker already added to cart!");
         return;
       }
       let speakerMatch = null;
+      //this look loops through the speaker list to get all the data 
       for(let j=0; j < allSpeakers.length; j++){
         if(allSpeakers[j].id === targetId){            
           speakerMatch = allSpeakers[j];
           break;
           }
         }
-        if(speakerMatch !== null){
+        if(speakerMatch !== null){ //this if statement adds (push) speaker to shopping cart
         shoppingCart.push(speakerMatch);
       }
+      //save the new list in the user's cache
       localStorage.setItem('SummitPointCart', JSON.stringify(shoppingCart));
+      //refresh the table and cart
       loadShoppingCart();
       loadTable();
   }
   
 //TOGGLE DELETE/UNDO
 function toggleDeleteCartItem(speakerId){
-  let targetId = Number(speakerId);
+  let targetId = Number(speakerId);//convert id to number so it compares ok
+  //look for item.id where it matches targetId - look for selected speaker
   shoppingCart = shoppingCart.filter(function(item){
-    return item.id !== targetId;
+    return item.id !== targetId; //keep all items that do not match the selected speaker
   });
+  //save to user's cache
   localStorage.setItem('SummitPointCart', JSON.stringify(shoppingCart));
+  //refresh the tables
   loadShoppingCart();
   loadTable();
 }
@@ -182,4 +187,7 @@ document.getElementById('cart-table-body').addEventListener('click', function(ev
   if(event.target.closest('.toggle-cart-delete-btn')){ //tried .classList.contains here but due to something with bootstrap, .closest is better
      toggleDeleteCartItem(speakerId);
   }
-}); 
+});
+  //check out button
+document.getElementById('checkout-btn').addEventListener('click', checkout); //when clicked, run checkout() function
+  
