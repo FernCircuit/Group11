@@ -186,8 +186,9 @@ async function checkout(){
   xhr.setRequestHeader("Content-Type", "application/json");
   //send the JSON to backend
   xhr.send(JSON.stringify(formatCart));
-}
+
 */
+}
     
 //EVENT LISTENERS ----------------------------------------------------------
     //add speaker to cart
