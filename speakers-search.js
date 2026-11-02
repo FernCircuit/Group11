@@ -11,8 +11,8 @@ $(document).ready(function(){
             var lastName = $row.find('td:nth-child(3)').text().toLowerCase();    //get lastname column
             var specialty = $row.find('td:nth-child(4)').text().toLowerCase();   //get specialty column
             //the search returns match if greater than -1 (-1 means not found in js)
-            var matchFound = (nameText.indexOf(value) > -1 || 
-                              categoryText.indexOf(value) > -1 ||
+            var matchFound = (firstName.indexOf(value) > -1 || 
+                              lastName.indexOf(value) > -1 ||
                               specialty.indexOf(value) > -1);
             //test matchFound 
             if(matchFound){ 
