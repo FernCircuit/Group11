@@ -138,11 +138,13 @@ function toggleDeleteCartItem(speakerId){
 
 //AJAX TO RESTFUL API -------------------------------------------------------
 async function checkout(){
+  //if(event) event.preventDefault(); //prevents page from refreshing automatically
+  //block it if the cart is empty:
   if (shoppingCart.length === 0){
     alert("Cart is empty");
     return;
   }
-
+  //format cart for JSON backend
   const formatCart = {
     "sendDate": new Date().toISOString(),
     "numItems": shoppingCart.length,
@@ -154,21 +156,32 @@ async function checkout(){
       };
     })
   };
-
+  //create new XMLHttpRequest
   const xhr = new XMLHttpRequest();
+  //this is what happens when the request loads
   xhr.addEventListener("load", function(){
+    //check for successful http codes 200 OK (200-299)
     if(xhr.status >= 200 && xhr.status < 300){
       alert("Success! Cart layout processed");
+      //clear out the cart, localStorage, and refresh tables:
+      shoppingCart =[];
+      localStorage.removeItem('SummitPointCart');
+      loadShoppingCart();
+      loadTable();
+      //now, redirect to checkout form
+      window.location.href = "checkout.html";
     }else{
-      console.error("Transmission Error: ", xhr.status);
+      console.error("Transmission Error: ", xhr.status); //else print error
     }
   });
-  xhr.open("POST", "https://ferncircuit.github.io/");
+  //contains necessary data to send the form to backend (POST)
+  xhr.open("POST", "https://ferncircuit.github.io/checkout");
+  //formats the http header:
   xhr.setRequestHeader("Content-Type", "application/json");
+  //send the JSON to backend
   xhr.send(JSON.stringify(formatCart));
 }
     
-
 //EVENT LISTENERS ----------------------------------------------------------
     //add speaker to cart
 document.getElementById('speaker-table-body').addEventListener('click', function(event){
