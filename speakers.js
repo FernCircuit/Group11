@@ -204,7 +204,7 @@ document.getElementById('cart-table-body').addEventListener('click', function(ev
   let row = event.target.closest('tr');
   if(!row) { return; }
   let speakerId = row.getAttribute('data-id');
-  if(event.target.closest('.toggle-cart-delete-btn')){ //tried .classList.contains here but due to something with bootstrap, .closest is better
+  if(event.target.closest('.toggle-cart-delete-btn')){ //tried .classList.contains here but due to something with bootstrap
      toggleDeleteCartItem(speakerId);
   }
 });
