@@ -21,37 +21,7 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
 
     // Load the shopping cart from localStorage
     var storedSpeakers = localStorage.getItem("SummitPointCart");
-    //since localstorage only contains to values, I wasn't sure how to do this,
-    //but I got the values from localstorage (cart) then opened up the json file
-    //and found the items and then loaded the new sessions from the file array
-    //there is probably a better way to do this
-
-    //open the json file
-    $http.get("speakers.json")
-    .then(function(response){
-        var listSpeakers = response.data;
-        var cartSpeakers = [];
-        if(storedSpeakers){
-            cartSpeakers = JSON.parse(storedSpeakers);
-        }
-        //loop through the json file and find the speakers
-        for(var i=0;i<cartSpeakers.length; i++){
-            var cartItem = cartSpeakers[i];
-            var matchedProfile = null;
-
-            //match the ids
-            for(var j=0; j<listSpeakers.length; j++){
-                if(listSpeakers[j].id === cartItem.id){
-                    matchedProfile = listSpeakers[j];
-                    break;
-                }
-            }
-            //if theres a match, load the topics
-            if (matchedProfile){
-                cartItem.availableTopics = matchedProfile.availableTopics;
-            }else{
-                cartItem.availableTopics = [];
-            }
+  
     //call the calculation function
     $scope.orderTotal = function(){
         return calculateOrderTotal();
