@@ -24,7 +24,7 @@
 <!--------------------START CHECKOUT FORM HERE------------------------->
         <div ng-controller="CheckoutController" class="mx-auto col-md-8 bg-white p-4 rounded shadow-sm">
 
-            <form ng-submit="submit()" ng-show="!submitted">
+            <form ng-submit="submit()" ng-show="!submitted" novalidate> //turns off angular validation to use vanilla js
 
                 <div class="mb-3">
                 <h1>Before you go!</h1>
@@ -33,51 +33,45 @@
 
                 <div class="mb-4">
                     <h5 class="border-top">Select Sessions they will speak at:</h5>
-                    //ng-repeat loops through the JS Angular array in Checkout.js
+                    <!--ng-repeat loops through the JS Angular array in Checkout.js-->
                     <label ng-repeat="session in sessions" class="d-block session-list-item">
                         <input type="checkbox" ng-model="session.selected">{{ session.name }}</label>
                     <h5 class="mt-2">Select Participation Type:</h5>
-                    <label><input type="radio"
-                            name="participationType"
-                            ng-model="speaker.type"
-                            value="In-Person"
-                            required>
-                        In-Person
+                    <label>
+                        <input type="radio" name="participationType" ng-model="speaker.type"
+                            value="In-Person" required>In-Person
                     </label>
                     <label>
-                        <input type="radio"
-                            name="participationType"
-                            ng-model="speaker.type"
-                            value="Virtual"
-                            required>
-                        Virtual
+                        <input type="radio" name="participationType" ng-model="speaker.type"
+                            value="Virtual" required>Virtual
                     </label>
                     <label>
-                        <input type="radio"
-                            name="participationType"
-                            ng-model="speaker.type"
-                            value="VIP"
-                            required>
-                        VIP
+                        <input type="radio" name="participationType" ng-model="speaker.type"
+                            value="VIP" required>VIP
                     </label>
                 </div>
+                <div id="typeError" class="text-danger small fw-bold mt-1"></div> <!-- validation error -->
                 <div class="mb-3">
                     <h5>Finally, please provide your contact info:</h5>
                     <div class="mb-3">
                         <label class="form-label">First Name:</label>
                         <input class="form-control" type="text" ng-model="contact.firstName" required>
+                        <div id="firstNameError" class="text-danger small fw-bold mt-1"></div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Last Name:</label>
                         <input class="form-control" type="text" ng-model="contact.lastName" required>
+                        <div id="lastNameError" class="text-danger small fw-bold mt-1"></div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email:</label>
+                        <label class="form-label">Email Address:</label>
                         <input class="form-control" type="email" ng-model="contact.email" required>
+                        <div id="emailError" class="text-danger small fw-bold mt-1"></div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone Number:</label>
                         <input class="form-control" type="tel" ng-model="contact.phoneNumber" required>
+                        <div id="phoneError" class="text-danger small fw-bold mt-1"></div>
                     </div>
                 </div>
                 <button id="checkout-submit" class="btn btn-primary w-100 mt-2" type="submit">Confirm Details</button>
