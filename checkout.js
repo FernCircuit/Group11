@@ -21,6 +21,23 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
 
     // Load the shopping cart from localStorage
     var storedSpeakers = localStorage.getItem("SummitPointCart");
+
+    if(storedSpeakers){
+        var origCart = JSON.parse(storedSpeakers);
+        $scope.savedSpeakers = origCart.map(function(speaker){
+            var topics = speaker.availableTopics [];
+            speaker.topicSelections = topics.map(function(topicName){
+                return{
+                    name:topicName,
+                    selected:false,
+                    duration:1
+                };
+            });
+            return speaker;
+        });
+    }else{
+        $scope.savedSpeakers = [];
+    }
   
     //call the calculation function
     $scope.orderTotal = function(){
