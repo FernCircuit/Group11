@@ -21,22 +21,10 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
 
     // Load the shopping cart from localStorage
     var storedSpeakers = localStorage.getItem("SummitPointCart");
-
-    //if the storedSpeakers exists, loop through and perform the operations
-    if(storedSpeakers){
-        $scope.savedSpeakers = JSON.parse(storedSpeakers); //adds cart speakers to saved
-        //loop through each speaker and get list of individual topics
-        $scope.savedSpeakers.forEach(function(speaker){
-            if(speaker.availableTopics){
-                speaker.topicSelections = speaker.availableTopics.map(function(topicName){
-                    return {
-                        name: topicName, selected: false, type: "", duration: 1.0 }; //duration is defaulted to 1hr
-                });
-            }else{
-                speaker.topicSelections = []; //if speaker has no topics
-            }
-        });
-    }
+    //since localstorage only contains to values, I wasn't sure how to do this,
+    //but I got the values from localstorage (cart) then opened up the json file
+    //and found the items and then 
+    
     //call the calculation function
     $scope.orderTotal = function(){
         return calculateOrderTotal();
