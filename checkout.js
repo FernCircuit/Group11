@@ -37,9 +37,6 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
         });
 
     }
-    $scope.submitted = false;
-
-        
     //set to false initially
     $scope.submitted = false;
     
