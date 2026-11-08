@@ -7,7 +7,6 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
 
     //Speaker type - create the form data models
     $scope.speaker = {
-        sessions: "",
         type: ""
     };
     //Speaker details
@@ -26,9 +25,22 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
         { name: "Web Development Trends", selected: false }
     ];
 
+    //set to false initially
+    $scope.submitted = false;
+    
     //SUBMIT FUNCTION
     //when form is submitted, toggle form to true
     $scope.submit = function() {
+        //validity chekc
+        if ($scope.contact.firstName == "" || $scope.contact.lastName == "") {
+            alert ("Please enter your full name.");
+            return;
+        }
+        if($scope.speaker.type ==""){
+            alert("Please select a speaker type.");
+            return;
+        }
+        
         //build data structure to send:
         var payload = { 
             userData: $scope.contact,
@@ -39,9 +51,9 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
         console.log("Preparing data for AJAX", payload);
         
         //set up post to send to http
-        $http.post("api/checkout", payload)
+        $http.post("api/checkout", payload) //just ends in 404 for now until backend done
             .then(function(response){
-                alert("Success! Connected to live server.");
+                alert("Server connection was successful.");
                 localStorage.removeItem('SummitPointCart');
                 $scope.submitted = true;
             })
@@ -56,3 +68,8 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
     };
 
 });
+
+function validate(){
+    document.getElementById
+
+}
