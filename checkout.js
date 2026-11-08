@@ -22,8 +22,9 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
     // Load the shopping cart from localStorage
     var storedSpeakers = localStorage.getItem("SummitPointCart");
 
+    //if the storedSpeakers exists, loop through and perform the operations
     if(storedSpeakers){
-        $scope.savedSpeakers = JSON.parse(storedSpeakers);
+        $scope.savedSpeakers = JSON.parse(storedSpeakers); //adds cart speakers to saved
         //loop through each speaker and get list of individual topics
         $scope.savedSpeakers.forEach(function(speaker){
             if(speaker.availableTopics){
@@ -35,8 +36,11 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
                 speaker.topicSelections = []; //if speaker has no topics
             }
         });
-
     }
+    //call the calculation function
+    $scope.orderTotal = function(){
+        return calculateOrderTotal();
+    };
     //set to false initially
     $scope.submitted = false;
     
@@ -50,8 +54,8 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
         //build data structure to send:
         var payload = { 
             userData: $scope.contact,
-            type: $scope.speaker.type,
-            sessions: $scope.sessions
+            selectedSpeakers: $scope.savedSpeakers,
+            totalCost: $scope.orderTotal()
         };
         //for troubleshooting in dev tools
         console.log("Preparing data for AJAX", payload);
@@ -74,6 +78,19 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
             });
     };
 
+//-----------Calculate the Cart Total-----------------
+function calculateOrderTotal(){
+    var totalCost = 0;
+    $scope.savedSpeakers.forEach(function(speaker){
+        speaker.topicSelections.forEach(function(topic){
+            if(topic.selected){
+                //rate x duration 
+                totalCost += (Number(speaker.rate) * Number(topic.duration));
+            }
+        });
+    });
+    return totalCost.toFixed(2); //formats to 2 decimal places
+}
 
 //-----------JS VALIDITY CHECKS FUNCTION---------------------
 //--------------------------------------------------
