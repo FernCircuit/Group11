@@ -31,16 +31,10 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
     //SUBMIT FUNCTION
     //when form is submitted, toggle form to true
     $scope.submit = function() {
-        //validity chekc
-        if ($scope.contact.firstName == "" || $scope.contact.lastName == "") {
-            alert ("Please enter your full name.");
+        //validity function call
+        if(validateForm() == false){
             return;
         }
-        if($scope.speaker.type ==""){
-            alert("Please select a speaker type.");
-            return;
-        }
-        
         //build data structure to send:
         var payload = { 
             userData: $scope.contact,
@@ -73,6 +67,8 @@ function validateForm(){
     let firstNameError = document.getElementById("firstNameError");
     let lastNameError = document.getElementById("lastNameError");
     let typeError = document.getElementById("typeError");
+    let phoneError = document.getElementById("phoneError");
+    let emailError = document.getElementById("emailError");
 
     //clear out the inner html text so errors go away
     if (firstNameError){
@@ -84,17 +80,34 @@ function validateForm(){
     if (typeError){
         typeError.innerText = "";
     }
+    if (phoneError){
+        phoneError.innerText = "";
+    }
+    if (emailError){
+        emailError.innerText = "";
+    }
     var isFormValid = true; //reset form to true
     
     //check for missing data
     if($scope.contact.firstName == ""){
         if(firstNameError) { firstNameError.innerText = "* First name is required."};
+        isFormValid = false; //set to false, ie dont send
     }
     if($scope.contact.lastName == ""){
         if(lastNameError) { lastNameError.innerText = "* Last name is required."};
+        isFormValid = false;
     }
     if($scope.speaker.type == ""){
         if(typeError) { typeError.innerText = "* Please select a speaker type."};
+        isFormValid = false;
+    }
+    if($scope.contact.phoneNumber == ""){
+        if(phoneError) { phoneError.innerText = "* Please enter valid phone number."};
+        isFormValid = false;
+    }
+    if($scope.contact.email == ""){
+        if(emailError) { emailError.innerText = "* Please enter valid email."};
+        isFormValid = false;
     }
     return isFormValid;
 }
