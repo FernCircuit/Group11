@@ -67,9 +67,36 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
             });
     };
 
-});
 
-function validate(){
-    document.getElementById
 
+function validateForm(){
+    let firstNameError = document.getElementById("firstNameError");
+    let lastNameError = document.getElementById("lastNameError");
+    let typeError = document.getElementById("typeError");
+
+    //clear out the inner html text so errors go away
+    if (firstNameError){
+        firstNameError.innerText = "";
+    }
+    if (lastNameError){
+        lastNameError.innerText = "";
+    }
+    if (typeError){
+        typeError.innerText = "";
+    }
+    var isFormValid = true; //reset form to true
+    
+    //check for missing data
+    if($scope.contact.firstName == ""){
+        if(firstNameError) { firstNameError.innerText = "* First name is required."};
+    }
+    if($scope.contact.lastName == ""){
+        if(lastNameError) { lastNameError.innerText = "* Last name is required."};
+    }
+    if($scope.speaker.type == ""){
+        if(typeError) { typeError.innerText = "* Please select a speaker type."};
+    }
+    return isFormValid;
 }
+
+    });
