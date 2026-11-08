@@ -41,7 +41,7 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
             type: $scope.speaker.type,
             sessions: $scope.sessions
         };
-        //for troubleshooting
+        //for troubleshooting in dev tools
         console.log("Preparing data for AJAX", payload);
         
         //set up post to send to http
@@ -52,10 +52,11 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
                 $scope.submitted = true;
             })
             .catch(function(error){
+                //errors for troubleshooting
                 console.log("Ajax transmission test");
                 console.error("Destination 'api/checkout' Not Found");
                 console.error("HTTP Response Code:", error.status);
-
+                //clear the cart
                 localStorage.removeItem('SummitPointCart');
                 $scope.submitted = true;
             });
@@ -120,6 +121,5 @@ function validateForm(){
         isFormValid = false;
     }
     return isFormValid;
-}
-
-    });
+    }
+});
