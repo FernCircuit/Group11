@@ -33,16 +33,11 @@
 
                 <div class="mb-4">
                     <h5 class="border-top">Select Sessions they will speak at:</h5>
-                    <label ng-repeat="session in sessions" class="d-block" id="session-list">
-                        <input type="checkbox"
-                            ng-model="session.selected">
-                        {{ session.name }}
-                    </label>
-
+                    //ng-repeat loops through the JS Angular array in Checkout.js
+                    <label ng-repeat="session in sessions" class="d-block session-list-item">
+                        <input type="checkbox" ng-model="session.selected">{{ session.name }}</label>
                     <h5 class="mt-2">Select Participation Type:</h5>
-
-                    <label>
-                        <input type="radio"
+                    <label><input type="radio"
                             name="participationType"
                             ng-model="speaker.type"
                             value="In-Person"
@@ -93,7 +88,7 @@
 
                 <p><strong>First Name:</strong> {{ contact.firstName }}</p>
 
-                <p><strong>First Name:</strong> {{ contact.lastName }}</p>
+                <p><strong>Last Name:</strong> {{ contact.lastName }}</p>
 
                 <p><strong>Email:</strong> {{ contact.email }}</p>
 
