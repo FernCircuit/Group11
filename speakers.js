@@ -135,7 +135,7 @@ function toggleDeleteCartItem(speakerId){
   loadShoppingCart();
   loadTable();
 }
-
+/*
 //AJAX TO RESTFUL API -------------------------------------------------------
 async function checkout(){
   //if(event) event.preventDefault(); //prevents page from refreshing automatically
@@ -180,16 +180,16 @@ async function checkout(){
       console.error("Transmission Error: ", xhr.status); //else print error
     }
   });
-  /* (COMMENTED OUT FOR NOW) (NEEDED FOR NEXT PART)
+   (COMMENTED OUT FOR NOW) (NEEDED FOR NEXT PART)
   //contains necessary data to send the form to backend (POST)
   xhr.open("POST", "https://ferncircuit.github.io/checkout");
   //formats the http header:
   xhr.setRequestHeader("Content-Type", "application/json");
   //send the JSON to backend
   xhr.send(JSON.stringify(formatCart));
-*/
+
 }
-    
+    */
 //EVENT LISTENERS ----------------------------------------------------------
     //add speaker to cart
 document.getElementById('speaker-table-body').addEventListener('click', function(event){
@@ -210,5 +210,7 @@ document.getElementById('cart-table-body').addEventListener('click', function(ev
   }
 });
   //check out button
-document.getElementById('checkout-btn').addEventListener('click', checkout); //when clicked, run checkout() function
+document.getElementById('checkout-btn').addEventListener('click', function(event){
+  window.location.href = "/checkout.html";
+}); //when clicked, run checkout() function
   
