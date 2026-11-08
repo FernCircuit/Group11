@@ -24,33 +24,48 @@
 <!--------------------START CHECKOUT FORM HERE------------------------->
         <div ng-controller="CheckoutController" class="mx-auto col-md-8 bg-white p-4 rounded shadow-sm">
 
-            <form ng-submit="submit()" ng-show="!submitted" novalidate> //turns off angular validation to use vanilla js
+            <form ng-submit="submit()" ng-show="!submitted" novalidate> <!--turns off angular validation to use vanilla js-->
 
                 <div class="mb-3">
                 <h1>Before you go!</h1>
                 <h5>We need some more information.</h5>
                 </div>
 
-                <div class="mb-4">
-                    <h5 class="border-top">Select Sessions they will speak at:</h5>
-                    <!--ng-repeat loops through the JS Angular array in Checkout.js-->
-                    <label ng-repeat="session in sessions" class="d-block session-list-item">
-                        <input type="checkbox" ng-model="session.selected">{{ session.name }}</label>
-                    <h5 class="mt-2">Select Participation Type:</h5>
-                    <label>
-                        <input type="radio" name="participationType" ng-model="speaker.type"
-                            value="In-Person" required>In-Person
-                    </label>
-                    <label>
-                        <input type="radio" name="participationType" ng-model="speaker.type"
-                            value="Virtual" required>Virtual
-                    </label>
-                    <label>
-                        <input type="radio" name="participationType" ng-model="speaker.type"
-                            value="VIP" required>VIP
-                    </label>
+                <!--Load selections from shopping cart with options-->
+                <div class="mb-4 border-bottom pb-3">
+                    <h5 class="fw-bold mb-3">Your Shopping Cart Summary:</h5>
+
+                    <!--load speaker available sessions-->
+                    <p class="mb-2 text-secondary small font-monospace text-uppercase fw-bold">Select your preferred sessions:</p>
+                    <div ng-repeat = "speaker in savedSpeakers" class="card mb-3 p-3 bg-light shadow-sm">
+                     <div class="d-flex justify-content-between align-items-center">
+                         <h6 class="mb-1 fw-bold">SPK-{{("00"+speaker.id).slice(-3)}} - 
+                             {{speaker.firstname}} {{speaker.lastname}}</h6>
+                         <span class="badge bg-secondary">${{speaker.rate}}</span>
+                     </div>
+                        <div class="ms-2">
+                            <p class="mb-1 small text-muted fw-semibold">Select Desired Sessions:</p>
+                           <div ng-repeat="topic in speaker.topicSelections" class="mb-3 p-2 bg-white rounded border">
+                               <label class="d-block fw-semibold small mb-1">
+                                   <input type="checkbox" ng-model="topic.selected" class="me-1"> {{topic.name}}
+                               </label>
+
+                               <div ng-show="topic.selected" class="ms-3 mt-1 p-2 bg-light rounded border-start border-primary border-3">
+                                   <span class="small text-muted d-block mb-1">Choose Participation Format:</span>
+                                    <label class="me-2 small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="In-Person"> In-Person</label>
+                                    <label class="me-2 small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="Virtual"> Virtual</label>
+                                    <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="VIP"> VIP</label>
+                                    <span class="small text-muted d-block mt-2 mb-1">Select Presentation Duration:</span>
+                                    <select class="form-select form-select-sm w-50" ng-model="topic.duration" ng-options="hours as label for (hours, label) in {0.5: '0.5 Hours (Half Hour)', 1.0: '1.0 Hours (1 Hour)', 2.0: '2.0 Hours (2 Hours)'}"></select>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="card p-3 bg-dark text-white rounded shadow-sm d-flex flex-row justify-content-between align-items-center mt-3">
+                        <h5 class="mb-0 fw-bold font-monospace text-uppercase text-warning">Grand Total Cost:</h5>
+                        <h4 class="mb-0 fw-bold font-monospace text-success">${{ calculateGrandTotal() }}</h4>
+                    </div>
                 </div>
-                <div id="typeError" class="text-danger small fw-bold mt-1"></div> <!-- validation error -->
                 <div class="mb-3">
                     <h5>Finally, please provide your contact info:</h5>
                     <div class="mb-3">
@@ -81,23 +96,29 @@
                 <h2>Request Confirmed!</h2>
 
                 <p><strong>First Name:</strong> {{ contact.firstName }}</p>
-
                 <p><strong>Last Name:</strong> {{ contact.lastName }}</p>
-
                 <p><strong>Email:</strong> {{ contact.email }}</p>
-
                 <p><strong>Phone Number:</strong> {{ contact.phoneNumber }}</p>
-
                 <p><strong>Participation:</strong> {{ speaker.type }}</p>
-
-                <h3>Selected Sessions:</h3>
-
-                <ul>
-                    <li ng-repeat="session in sessions"
-                        ng-if="session.selected">
-                        {{ session.name }}
-                    </li>
-                </ul>
+                <div class="mt-4">
+                    <h5>Confirmed Speakers & Booked Sessions</h5>
+                    <ul>
+                        <li ng-repeat="speaker in savedSpeakers">
+                            <strong>SPK-{{("00"+speaker.id).slice(-3)}}: {{speaker.firstname}} {{speaker.lastname}}</strong>
+                            <ul>
+                                <li ng-repeat="topic in speaker.topicSelections" ng-if="topic.selected">
+                                    Session: {{topic.name}}
+                                    <span class="badge bg-primary ms-1" ng-if="topic.type">{{topic.type}}</span>
+                                    <span class="badge bg-warning text-dark ms-1">{{topic.duration}} hrs</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="alert alert-success p-3 rounded d-flex justify-content-between align-items-center mt-3">
+                        <strong class="text-uppercase font-monospace text-success-emphasis">Total Invoice Cost:</strong>
+                        <h4 class="mb-0 fw-bold font-monospace text-success-emphasis">${{cartTotal()}}</h4>
+                    </div>
+                </div>
 
                 <p>We will contact you shortly with updates!</p>
 
