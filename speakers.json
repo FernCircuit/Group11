@@ -1,72 +1,122 @@
 [
-	{
-		"id": 1,
-		"firstname": "Krishna",
-		"lastname": "Castiel",
-		"specialty": "Tech",
-		"rate": 99.99 
-	},
-	{
-		"id": 2,
-		"firstname": "Madara",
-		"lastname": "Ferre",
-		"specialty": "Business",
-		"rate": 159.99 
-	},
-	{
-		"id": 3,
-		"firstname": "Pasi",
-		"lastname":"Walther",
-		"specialty": "Tech",
-		"rate": 79.99
-	},
-	{
-		"id": 4,
-		"firstname": "Adella",
-		"lastname": "Pankaj",
-		"specialty": "Health",
-		"rate": 199.99
-	},
-	{
-		"id": 5,
-		"firstname": "Geoffroy",
-		"lastname": "Alex",
-		"specialty": "Health",
-		"rate": 99.99 
-	},
-	{
-		"id": 6,
-		"firstname": "Ezekiel",
-		"lastname": "Waverly",
-		"specialty": "Commerce",
-		"rate": 49.99
-	},
-	{
-		"id": 7,
-		"firstname": "Arundhati",
-		"lastname":"Kristin",
-		"specialty": "Tech",
-		"rate": 259.99
-	},
-	{
-		"id": 8,
-		"firstname": "Carlie",
-		"lastname": "Armandine",
-		"specialty": "Marketing",
-		"rate": 89.99
-	},
-	{
-		"id": 9,
-		"firstname": "Lalia",
-		"lastname": "Fiete",
-		"specialty": "Business",
-		"rate": 139.99
-	},
-	{
-		"id": 10,
-		"firstname": "Dougie",
-		"lastname": "Vasuda",
-		"specialty": "Commerce",
-		"rate": 99.99 
-	}
+  {
+    "id": 1,
+    "firstname": "Krishna",
+    "lastname": "Castiel",
+    "specialty": "Tech",
+    "rate": 99.99,
+    "availableTopics": [
+      "Web Development Trends",
+      "Database Management",
+      "Cloud Infrastructure Basics"
+    ]
+  },
+  {
+    "id": 2,
+    "firstname": "Madara",
+    "lastname": "Ferre",
+    "specialty": "Business",
+    "rate": 159.99,
+    "availableTopics": [
+      "Business in IST",
+      "Tech Startup Operations",
+      "Corporate Leadership Strategies"
+    ]
+  },
+  {
+    "id": 3,
+    "firstname": "Pasi",
+    "lastname": "Walther",
+    "specialty": "Tech",
+    "rate": 79.99,
+    "availableTopics": [
+      "Introduction to Cybersecurity",
+      "How Users Interact With UI",
+      "Mobile App Architecture"
+    ]
+  },
+  {
+    "id": 4,
+    "firstname": "Adella",
+    "lastname": "Pankaj",
+    "specialty": "Health",
+    "rate": 199.99,
+    "availableTopics": [
+      "Introduction to Health Technology",
+      "Electronic Health Record Standards",
+      "AI Diagnostics in Medicine"
+    ]
+  },
+  {
+    "id": 5,
+    "firstname": "Geoffroy",
+    "lastname": "Alex",
+    "specialty": "Health",
+    "rate": 99.99,
+    "availableTopics": [
+      "Telehealth System Management",
+      "Healthcare Privacy and Security Compliance",
+      "Biomedical Informatics Principles"
+    ]
+  },
+  {
+    "id": 6,
+    "firstname": "Ezekiel",
+    "lastname": "Waverly",
+    "specialty": "Commerce",
+    "rate": 49.99,
+    "availableTopics": [
+      "E-Commerce Platform Optimization",
+      "Digital Payment Infrastructures",
+      "Online Retail Inventory Logistics"
+    ]
+  },
+  {
+    "id": 7,
+    "firstname": "Arundhati",
+    "lastname": "Kristin",
+    "specialty": "Tech",
+    "rate": 259.99,
+    "availableTopics": [
+      "Machine Learning Engineering",
+      "Advanced Systems Architecture",
+      "DevOps Deployment Pipelines"
+    ]
+  },
+  {
+    "id": 8,
+    "firstname": "Carlie",
+    "lastname": "Armandine",
+    "specialty": "Marketing",
+    "rate": 89.99,
+    "availableTopics": [
+      "Data-Driven Marketing Analytics",
+      "Search Engine Optimization Core",
+      "Social Media Campaign Architecture"
+    ]
+  },
+  {
+    "id": 9,
+    "firstname": "Lalia",
+    "lastname": "Fiete",
+    "specialty": "Business",
+    "rate": 139.99,
+    "availableTopics": [
+      "Project Management Metrics",
+      "Agile Framework Implementations",
+      "Strategic Financial Planning"
+    ]
+  },
+  {
+    "id": 10,
+    "firstname": "Dougie",
+    "lastname": "Vasuda",
+    "specialty": "Commerce",
+    "rate": 99.99,
+    "availableTopics": [
+      "Supply Chain Technology Systems",
+      "Customer Relationship Management Strategies",
+      "Global Trade Transaction Compliance"
+    ]
+  }
 ]
