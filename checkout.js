@@ -16,15 +16,30 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
         email: "",
         phoneNumber: ""
     };
-    // Available conference sessions - creates an array
-    $scope.sessions = [
-        { name: "Introduction to Health Technology", selected: false },
-        { name: "Business in IST", selected: false },
-        { name: "How Users Interact With UI", selected: false },
-        { name: "Database Management", selected: false },
-        { name: "Web Development Trends", selected: false }
-    ];
+    // Create an array to hold the saved speakers
+    $scope.savedSpeakers = [];
 
+    // Load the shopping cart from localStorage
+    var storedSpeakers = localStorage.getItem("SummitPointCart");
+
+    if(storedSpeakers){
+        $scope.savedSpeakers = JSON.parse(storedSpeakers);
+        //loop through each speaker and get list of individual topics
+        $scope.savedSpeakers.forEach(function(speaker){
+            if(speaker.availableTopics){
+                speaker.topicSelections = speaker.availableTopics.map(function(topicName){
+                    return {
+                        name: topicName, selected: false, type: "", duration: 1.0 }; //duration is defaulted to 1hr
+                });
+            }else{
+                speaker.topicSelections = []; //if speaker has no topics
+            }
+        });
+
+    }
+    $scope.submitted = false;
+
+        
     //set to false initially
     $scope.submitted = false;
     
