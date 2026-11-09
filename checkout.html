@@ -33,38 +33,43 @@
 
                 <!--Load selections from shopping cart with options-->
                 <div class="mb-4">
-                    <h5 class="fw-bold mb-3">Your Shopping Cart Summary:</h5>
-
+                    <h5 class="fw-bold mb-3 border-bottom pb-2 text-dark fw-bold">Your Shopping Cart Summary:</h5>
                     <!--load speaker available sessions-->
-                    <p class="mb-2">Select your preferred sessions:</p>
-                    <div ng-repeat = "speaker in savedSpeakers" class="card mb-3">
-                     <div class="d-flex justify-content-between align-items-center">
-                         <h6 class="mb-1">
-                             SPK-{{("00"+speaker.id).slice(-3)}} - {{speaker.firstname}} {{speaker.lastname}}</h6>
-                         <span class="badge">${{speaker.rate}}</span>
+                    <p class="text-muted small">Select your preferred sessions:</p>
+                    <div ng-repeat = "speaker in savedSpeakers" class="card mb-4">
+                     <div class="d-flex justify-content-between align-items-baseline">
+                         <h6 class="mb-1 text-primary fw-bold">
+                             SPK-{{("00"+speaker.id).slice(-3)}} - {{speaker.firstname}} {{speaker.lastname}}
+                         </h6>
+                         <span class="text-muted small">${{speaker.rate}} / hr</span>
                      </div>
-                        <div class="ms-2">
-                            <p class="mb-1">Select Desired Sessions:</p>
-                           <div ng-repeat="topic in speaker.topicSelections" class="mb-3 p-2 bg-white">
-                               <label class="mb-1">
-                                   <input type="checkbox" ng-model="topic.selected" class="me-1"> 
-                                   {{topic.name}}
-                               </label>
+                        <div class="ms-3 mt-2">
+                           <div ng-repeat="topic in speaker.topicSelections" class="mb-3">
+                               <div class="form-check">
+                                   <label class="form-check-label text-dark">
+                                       <input type="checkbox" ng-model="topic.selected" class="form-check-input"> 
+                                       {{topic.name}}
+                                   </label>
+                               </div>
 
-                               <div ng-show="topic.selected" class="ms-3">
-                                   <span class="mb-1">Choose Participation Format:</span>
+                               <div ng-show="topic.selected" class="ms-4 mt-2 ps-3 border-start text-secondary">
+                                   <div class="mb-2">
+                                   <span class="d-block small fw-bold mb-1">Choose Format:</span>
                                     <label class="me-2 small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="In-Person"> In-Person</label>
                                     <label class="me-2 small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="Virtual"> Virtual</label>
                                     <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="VIP"> VIP</label>
-                                    <span class="small text-muted d-block mt-2 mb-1">Select Presentation Duration:</span>
-                                    <select class="form-select form-select-sm w-50" ng-model="topic.duration" ng-options="hours as label for (hours, label) in {0.5: '0.5 Hours (Half Hour)', 1.0: '1.0 Hours (1 Hour)', 2.0: '2.0 Hours (2 Hours)'}"></select>
-                               </div>
+                                   </div>
+                                   <div>
+                                       <span class="d-block small fw-bold mb-1">Select Presentation Duration:</span>
+                                    <select class="form-select form-select-sm d-inline-block w-auto" ng-model="topic.duration" ng-options="hours as label for (hours, label) in {0.5: '0.5 Hours (Half Hour)', 1.0: '1.0 Hours (1 Hour)', 2.0: '2.0 Hours (2 Hours)'}"></select>
+                                   </div>
+                                </div>
                            </div>
                         </div>
                     </div>
                     <div class="card p-3 d-flex flex-row justify-content-between align-items-center mt-3">
                         <h5 class="mb-0 fw-bold text-uppercase">Total Cost:</h5>
-                        <h4 class="mb-0 fw-bold">${{ orderTotal() }}</h4>
+                        <h4 class="mb-0 fw-bold text-success">${{ orderTotal() }}</h4>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -100,7 +105,7 @@
                 <p><strong>Last Name:</strong> {{ contact.lastName }}</p>
                 <p><strong>Email:</strong> {{ contact.email }}</p>
                 <p><strong>Phone Number:</strong> {{ contact.phoneNumber }}</p>
-                <p><strong>Participation:</strong> {{ speaker.type }}</p>
+                <p><strong>Participation:</strong> {{ contact.type }}</p>
                 <div class="mt-4">
                     <h5>Confirmed Speakers & Booked Sessions</h5>
                     <ul>
@@ -130,8 +135,6 @@
 <!----------------------------END CHECKOUT FORM---------------------------------->
     </section>
     </main>
-  
-    
     <!--We can remove the banner later if we like, its mostly just for content right now.-->
     <section class="banner" aria-label="Page banner">
         <img src="imgs\Banner.jpg" alt="banner image">
@@ -139,8 +142,5 @@
     <section class="footer" aria-label="Page footer">
         <p>&copy; 2026 SummitPoint. All rights reserved.</p>
     </section>
-
-
 </body>
-
 </html>
