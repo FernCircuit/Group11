@@ -29,6 +29,9 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
     if(storedSpeakers){
         var origCart = JSON.parse(storedSpeakers);
         $scope.savedSpeakers = origCart.map(function(speaker){
+            if(speaker.topicSelections && speaker.topicSelections.length > 0){
+                return speaker;
+            }
             var topics = speaker.availableTopics || [];
             speaker.topicSelections = topics.map(function(topicName){
                 return{
