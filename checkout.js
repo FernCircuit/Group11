@@ -104,7 +104,7 @@ function calculateOrderTotal(){
 
 //-----------JS VALIDITY CHECKS FUNCTION---------------------
 //--------------------------------------------------
-function validateForm(formData){ //formData gives access to the angular file which I had to split up after much frustration
+function validateForm(){ //formData gives access to the angular file which I had to split up after much frustration
     //get all of the fields
     let firstNameError = document.getElementById("firstNameError");
     let lastNameError = document.getElementById("lastNameError");
@@ -118,6 +118,29 @@ function validateForm(formData){ //formData gives access to the angular file whi
     //variables needed for error checking
     var isFormValid = true; //reset form to true
     const invalidChars = /[^A-Za-z\s-]/; //set invalid char: letters, spaces, hyphens
+    //Validate the cart
+    var selectedCount = 0;
+    var cartValidationSuccess = true;
+    $scope.savedSpeakers.forEach(function(speaker) {
+        if (speaker.topicSelections) {
+            speaker.topicSelections.forEach(function(topic) {
+                if (topic.selected === true) {
+                    selectedCount++;
+                    // Verify Method is selected
+                    if (!topic.type || topic.type.trim() === "") {
+                        alert("Please select a Format (In-Person, Virtual, or VIP) for the session: " + topic.name);
+                        cartValidationPassed = false;
+                    }
+                    // Verify duration added
+                    if (!topic.duration || topic.duration.trim() === "") {
+                        alert("Please select a Presentation Duration for the session: " + topic.name);
+                        cartValidationPassed = false;
+                    }
+                }
+            });
+        }
+    });
+        
     //ERROR CHECKS START:
     //check for missing/invalid data
     var fname = $scope.contact.firstName || "";
