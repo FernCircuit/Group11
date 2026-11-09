@@ -5,10 +5,6 @@ var app = angular.module("checkoutApp", []);
 //controller & $scope: everything with $scope connects js to html
 app.controller("CheckoutController", function($scope, $http) { //added $http to connect to ajax
 
-    //Speaker type - create the form data models
-    $scope.speaker = {
-        type: ""
-    };
     //Speaker details
     $scope.contact = {
         firstName: "",
