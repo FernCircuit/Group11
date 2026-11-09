@@ -140,7 +140,13 @@ function validateForm(){ //formData gives access to the angular file which I had
             });
         }
     });
-        
+    if(selectedCount === 0){
+        alert("Please select at least one session");
+        return false;
+    }
+    if (cartValidationPassed ===false){
+        return false;
+    }
     //ERROR CHECKS START:
     //check for missing/invalid data
     var fname = $scope.contact.firstName || "";
