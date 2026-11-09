@@ -101,7 +101,7 @@ function calculateOrderTotal(){
     });
     return totalCost.toFixed(2); //formats to 2 decimal places
 }
-});
+
 //-----------JS VALIDITY CHECKS FUNCTION---------------------
 //--------------------------------------------------
 function validateForm(formData){ //formData gives access to the angular file which I had to split up after much frustration
@@ -158,4 +158,4 @@ function validateForm(formData){ //formData gives access to the angular file whi
     }
     return isFormValid;
     }
-
+});
