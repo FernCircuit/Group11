@@ -93,7 +93,9 @@ function calculateOrderTotal(){
         speaker.topicSelections.forEach(function(topic){
             if(topic.selected){
                 //rate x duration 
-                totalCost += (Number(speaker.rate) * Number(topic.duration));
+                var rate = parseFloat(speaker.rate) || 0;
+                var duration = parseFloat(topic.duration) || 0;
+                totalCost += (rate * duration);
             }
         });
     });
