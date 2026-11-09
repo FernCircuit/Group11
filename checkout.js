@@ -38,7 +38,7 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
                     name:topicName,
                     selected:false,
                     type: "In-Person", //in-person default
-                    duration:1.0 //1hr default
+                    duration:"1.0" //1hr default
                 };
             });
             return speaker;
