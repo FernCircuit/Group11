@@ -56,9 +56,9 @@
                                    <div class="mb-2">
                                        <span class="d-block small fw-bold mb-1">Choose Format:</span>
                                        <div class="d-flex flex-column gap-1">
-                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="In-Person"> In-Person</label>
-                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="Virtual"> Virtual</label>
-                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="VIP"> VIP</label>
+                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="In-Person"> In-Person</label>
+                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="Virtual"> Virtual</label>
+                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="VIP"> VIP</label>
                                        </div>
                                     </div>
                                    <div>
