@@ -48,8 +48,6 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
     $scope.orderTotal = function(){
         return calculateOrderTotal();
     };
-    //set to false initially
-    $scope.submitted = false;
     
     //SUBMIT FUNCTION
     //when form is submitted, toggle form to true
@@ -98,5 +96,5 @@ function calculateOrderTotal(){
     });
     return totalCost.toFixed(2); //formats to 2 decimal places
 }
-
+});
 
