@@ -45,8 +45,8 @@
                         <div class="ms-3 mt-2">
                            <div ng-repeat="topic in speaker.topicSelections" class="mb-3">
                                <!--should load checkboxes-->
-                               <div class="form-check">
-                                   <label class="form-check-label text-dark">
+                               <div class="form-check form-switch fs-5 mb-2">
+                                   <label class="form-check-label text-dark fw-semibold">
                                        <input type="checkbox" ng-model="topic.selected" class="form-check-input"> 
                                        {{topic.name}}
                                    </label>
