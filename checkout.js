@@ -36,7 +36,7 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
             speaker.topicSelections = topics.map(function(topicName){
                 return{
                     name:topicName,
-                    selected:false,
+                    selected:true,
                     type: "In-Person", //in-person default
                     duration:"1.0" //1hr default
                 };
