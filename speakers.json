@@ -7,8 +7,7 @@
     "rate": 99.99,
     "availableTopics": [
       "Web Development Trends",
-      "Database Management",
-      "Cloud Infrastructure Basics"
+      "Database Management"
     ]
   },
   {
@@ -54,7 +53,6 @@
     "specialty": "Health",
     "rate": 99.99,
     "availableTopics": [
-      "Telehealth System Management",
       "Healthcare Privacy and Security Compliance",
       "Biomedical Informatics Principles"
     ]
@@ -79,8 +77,7 @@
     "rate": 259.99,
     "availableTopics": [
       "Machine Learning Engineering",
-      "Advanced Systems Architecture",
-      "DevOps Deployment Pipelines"
+      "Advanced Systems Architecture"
     ]
   },
   {
@@ -91,8 +88,7 @@
     "rate": 89.99,
     "availableTopics": [
       "Data-Driven Marketing Analytics",
-      "Search Engine Optimization Core",
-      "Social Media Campaign Architecture"
+      "Search Engine Optimization Core"
     ]
   },
   {
@@ -114,9 +110,7 @@
     "specialty": "Commerce",
     "rate": 99.99,
     "availableTopics": [
-      "Supply Chain Technology Systems",
-      "Customer Relationship Management Strategies",
-      "Global Trade Transaction Compliance"
+      "Supply Chain Technology Systems"
     ]
   }
 ]
