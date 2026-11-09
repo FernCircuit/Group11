@@ -120,7 +120,7 @@ function validateForm(){ //formData gives access to the angular file which I had
     const invalidChars = /[^A-Za-z\s-]/; //set invalid char: letters, spaces, hyphens
     //Validate the cart
     var selectedCount = 0;
-    var cartValidationSuccess = true;
+    var cartValidationPassed = true;
     $scope.savedSpeakers.forEach(function(speaker) {
         if (speaker.topicSelections) {
             speaker.topicSelections.forEach(function(topic) {
