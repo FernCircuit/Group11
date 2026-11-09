@@ -101,13 +101,11 @@ function validateForm(){
     //get all of the fields
     let firstNameError = document.getElementById("firstNameError");
     let lastNameError = document.getElementById("lastNameError");
-    let typeError = document.getElementById("typeError");
     let phoneError = document.getElementById("phoneError");
     let emailError = document.getElementById("emailError");
     //clear out the inner html text so any existing errors dissapear
     firstNameError.innerText = "";
     lastNameError.innerText = "";
-    typeError.innerText = "";
     phoneError.innerText = "";
     emailError.innerText = "";
     //variables needed for error checking
@@ -131,11 +129,6 @@ function validateForm(){
         lastNameError.innerText = "Please enter valid last name.";
         isFormValid = false;
     }
-    //check speaker type:
-    if($scope.speaker.type == ""){
-        typeError.innerText = "This field is required.";
-        isFormValid = false;
-    } 
     //check phone number:
     if($scope.contact.phoneNumber == ""){
         phoneError.innerText = "This field is required.";
