@@ -51,18 +51,21 @@
                                    </label>
                                </div>
 
-                               <div ng-show="topic.selected" class="ms-4 mt-2 ps-3 border-start text-secondary">
+                                   <div class="ms-4 mt-2 ps-3 border-start text-secondary">
                                    <div class="mb-2">
-                                   <span class="d-block small fw-bold mb-1">Choose Format:</span>
-                                    <label class="me-2 small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="In-Person"> In-Person</label>
-                                    <label class="me-2 small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="Virtual"> Virtual</label>
-                                    <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="VIP"> VIP</label>
-                                   </div>
+                                       <span class="d-block small fw-bold mb-1">Choose Format:</span>
+                                       <div class="d-flex flex-column gap-1">
+                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="In-Person"> In-Person</label>
+                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="Virtual"> Virtual</label>
+                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{$index}}" ng-model="topic.type" value="VIP"> VIP</label>
+                                       </div>
+                                    </div>
                                    <div>
                                        <span class="d-block small fw-bold mb-1">Select Presentation Duration:</span>
                                     <select class="form-select form-select-sm d-inline-block w-auto" ng-model="topic.duration" ng-options="hours as label for (hours, label) in {0.5: '0.5 Hours (Half Hour)', 1.0: '1.0 Hours (1 Hour)', 2.0: '2.0 Hours (2 Hours)'}"></select>
                                    </div>
                                 </div>
+                               
                            </div>
                         </div>
                     </div>
