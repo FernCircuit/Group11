@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="submissionApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummitPoint | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="submissions.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="fixed-top">
+        <a href="index.html">Overview</a>
+        <a href="signup.html">Event Registration</a>
+        <a href="speakers.html">Speaker Reservations</a>
+        <a href="materials.html">Material Management</a>
+        <a href="submissions.html">Session Submission</a>
+    </nav>
+
+    <!--We can remove the banner later if we like, its mostly just for content right now.-->
+    <section class="banner" aria-label="Page banner">
+        <img src="imgs\Banner.jpg" alt="banner image">
+    </section>
+
+    <section class="content" aria-label="Main content">
+        <div class="submission-form mx-auto col-md-8 bg-white p-4 rounded shadow-sm" ng-controller="SubmissionController">
+            <div ng-show="!submitted">
+                <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+                    <h1>Session submission form</h1>
+                    <a class="btn btn-sm btn-outline-primary" href="review.html">Review Submissions</a>
+                </div>
+                <p>Got a session suggestion for a conference? Fill out this form and our team of reveiwers will look it over for you!</p>
+                <form ng-submit="submit()">
+                    <fieldset>
+
+                        <!--title-->
+                        <div class="form-item mb-3">
+                            <label class="form-label" for="session-title">Session Title:</label>
+                            <input class="form-control" type="text" name="session-title" id="session-title" ng-model="submission.title">
+                        </div>
+
+                        <!--time-->
+                        <div class="form-item mb-3">
+                            <label class="form-label" for="session-time">Session Time:</label>
+                            <input class="form-control" type="time" name="session-time" id="session-time" ng-model="submission.time">
+                        </div>
+
+                        <!--duration-->
+                        <div class="form-item mb-3">
+                            <label class="form-label" for="session-duration">Session Duration (minutes):</label>
+                            <input class="form-control" type="number" name="session-duration" id="session-duration" min="15" step="15" ng-model="submission.duration">
+                        </div>
+
+                        <!--category-->
+                        <div class="form-item mb-3">
+                            <label class="form-label" for="category">Category:</label>
+                            <input class="form-control" type="text" name="category" id="category" ng-model="submission.category">
+                        </div>
+
+                        <!--speaker-->
+                        <div class="form-item mb-3">
+                            <label class="form-label" for="speaker">Speaker:</label>
+                            <select class="form-control" name="speaker" id="speaker" ng-model="submission.speaker">
+                                <option value="">-Select a Reserved Speaker-</option>
+                                <!--The rest of these options will be filled based on which speakers are reserved using AngularJS-->
+
+                            </select>
+                        </div>
+
+                        <!--abstract-->
+                        <div class="form-item mb-3">
+                            <label class="form-label" for="abstract">Abstract:</label><br>
+                            <textarea class="form-control" name="abstract" id="abstract" ng-model="submission.abstract" rows="5" cols="40" placeholder="Please provide some details about your suggestion."></textarea>
+                        </div>
+                    </fieldset>
+                    <button id="submission-submit" class="btn btn-primary w-100 mt-2" type="submit">Submit Form</button>
+                </form>
+            </div>
+
+            <div ng-show="submitted && !finalized" class="confirmation">
+                <h2>Form Submitted!</h2>
+                <p>Please provide your email and phone number. We will contact you when your submission has been reviewed.</p>
+                <form ng-submit="finalize()">
+
+                    <!--Email-->
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Email Address:</label>
+                        <input class="form-control" type="email" id="email" ng-model="contact.email">
+                    </div>
+
+                    <!--Phone Number-->
+                    <div class="mb-3">
+                            <label class="form-label" for="phoneNumber">Phone Number:</label>
+                            <input class="form-control" type="tel" id="phoneNumber" ng-model="contact.phoneNumber">
+                    </div>
+
+                    <button id="contact-submit" class="btn btn-primary w-100 mt-2" type="submit">Finalize</button>
+                </form>
+            </div>
+
+            <div ng-show="finalized">
+                <h2>Thank you for your submission!</h2>
+                <p>If you wish to file another submission, please click the button below.</p>
+                <button class="btn btn-primary w-100 mt-2" ng-click="newSubmission()">New submission</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer" aria-label="Page footer">
+        <p>&copy; 2026 SummitPoint. All rights reserved.</p>
+    </section>    
+</body>
+
+</html>
