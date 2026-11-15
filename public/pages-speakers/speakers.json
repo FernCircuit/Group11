@@ -112,5 +112,15 @@
     "availableTopics": [
       "Supply Chain Technology Systems"
     ]
+  },
+  {
+    "id": 1794774822268,
+    "firstname": "Marcus",
+    "lastname": "Vance",
+    "specialty": "Cybersecurity",
+    "rate": 0,
+    "availableTopics": [
+      "Securing Modern Web Applications"
+    ]
   }
 ]

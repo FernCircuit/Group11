@@ -5,27 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SummitPoint | Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="validate.js"></script>
     <script src="submissions.js"></script>
 
 </head>
 
 <body>
 
-    <nav class="fixed-top">
-        <a href="index.html">Overview</a>
-        <a href="signup.html">Event Registration</a>
-        <a href="speakers.html">Speaker Reservations</a>
-        <a href="materials.html">Material Management</a>
-        <a href="submissions.html">Session Submission</a>
-    </nav>
-
-    <!--We can remove the banner later if we like, its mostly just for content right now.-->
-    <section class="banner" aria-label="Page banner">
-        <img src="imgs\Banner.jpg" alt="banner image">
-    </section>
+    <!--Navbar and Banner now being fetched from JS. Must Edit navbar.html instead of here-->
+    <div id="header-placeholder"></div>
+    <script src="/header.js"></script>
+    <!--End header-->
 
     <section class="content" aria-label="Main content">
         <div class="submission-form mx-auto col-md-8 bg-white p-4 rounded shadow-sm" ng-controller="SubmissionController">
@@ -35,47 +28,64 @@
                     <a class="btn btn-sm btn-outline-primary" href="review.html">Review Submissions</a>
                 </div>
                 <p>Got a session suggestion for a conference? Fill out this form and our team of reveiwers will look it over for you!</p>
-                <form ng-submit="submit()">
+                <form ng-submit="submit()" novalidate> <!-- added novalidate to turn off the auto errors-->
                     <fieldset>
 
                         <!--title-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="session-title">Session Title:</label>
                             <input class="form-control" type="text" name="session-title" id="session-title" ng-model="submission.title">
+                            <span id="titleError" class="text-danger small"></span>
+
+
                         </div>
 
                         <!--time-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="session-time">Session Time:</label>
                             <input class="form-control" type="time" name="session-time" id="session-time" ng-model="submission.time">
+                            <span id="timeError" class="text-danger small"></span>
                         </div>
 
                         <!--duration-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="session-duration">Session Duration (minutes):</label>
                             <input class="form-control" type="number" name="session-duration" id="session-duration" min="15" step="15" ng-model="submission.duration">
+                            <span id="durationError" class="text-danger small"></span>
                         </div>
 
                         <!--category-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="category">Category:</label>
                             <input class="form-control" type="text" name="category" id="category" ng-model="submission.category">
+                            <span id="categoryError" class="text-danger small"></span>
                         </div>
 
                         <!--speaker-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="speaker">Speaker:</label>
-                            <select class="form-control" name="speaker" id="speaker" ng-model="submission.speaker">
-                                <option value="">-Select a Reserved Speaker-</option>
+                            <!--Dropdown shows if speakers exist-->
+                            <select class="form-control mb-2" 
+                                    name="speaker" 
+                                    id="speaker" 
+                                    ng-show="reservedSpeakers.length > 0"
+                                    ng-model="submission.speaker">
                                 <!--The rest of these options will be filled based on which speakers are reserved using AngularJS-->
-
+                                <option value="">-Select a Reserved Speaker-</option>
+                                <option ng-repeat="speaker in reservedSpeakers" value="{{ speaker }}">{{ speaker }}</option>
+                                <option value="__new__">+ Add a New Speaker</option><!--if no speakers exist or to add one not in the list-->
                             </select>
+                            <input class="form-control" type="text" id="new-speaker" placeholder="Enter speaker full name"
+                                    ng-show="reservedSpeakers.length === 0 || submission.speaker === '__new__'"
+                                    ng-model="submission.customSpeaker">
+                                    <span id="speakerError" class="text-danger small"></span>
                         </div>
 
                         <!--abstract-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="abstract">Abstract:</label><br>
                             <textarea class="form-control" name="abstract" id="abstract" ng-model="submission.abstract" rows="5" cols="40" placeholder="Please provide some details about your suggestion."></textarea>
+                            <span id="abstractError" class="text-danger small"></span>
                         </div>
                     </fieldset>
                     <button id="submission-submit" class="btn btn-primary w-100 mt-2" type="submit">Submit Form</button>
@@ -85,18 +95,20 @@
             <div ng-show="submitted && !finalized" class="confirmation">
                 <h2>Form Submitted!</h2>
                 <p>Please provide your email and phone number. We will contact you when your submission has been reviewed.</p>
-                <form ng-submit="finalize()">
+                <form ng-submit="finalize()" novalidate>
 
                     <!--Email-->
                     <div class="mb-3">
                         <label class="form-label" for="email">Email Address:</label>
                         <input class="form-control" type="email" id="email" ng-model="contact.email">
+                        <span id="emailError" class="text-danger small"></span>
                     </div>
 
                     <!--Phone Number-->
                     <div class="mb-3">
                             <label class="form-label" for="phoneNumber">Phone Number:</label>
                             <input class="form-control" type="tel" id="phoneNumber" ng-model="contact.phoneNumber">
+                            <span id="phoneError" class="text-danger small"></span>
                     </div>
 
                     <button id="contact-submit" class="btn btn-primary w-100 mt-2" type="submit">Finalize</button>

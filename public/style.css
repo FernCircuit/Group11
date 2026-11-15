@@ -18,6 +18,11 @@ nav a {
     color: #ececec;
     text-decoration: none;
 }
+#header-placeholder {
+    min-height: 240px;
+    background-color: #0f172a;
+    display: block;
+}
 .content {
     align-items: center;
     display: flex;

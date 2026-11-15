@@ -1,0 +1,63 @@
+// JQUERY SEARCH & SORT FOR SUBMISSIONS REVIEW (review.html)
+$(document).ready(function() {
+
+    // LIVE SEARCH FILTER
+    $('#submission-search').on('input keyup', function() {
+        var value = $(this).val().toLowerCase().trim();
+        var visibleCount = 0;
+
+        $('#submission-table-body tr').each(function() {
+            var $row = $(this);
+            var id = $row.find('td:nth-child(1)').text().toLowerCase();
+            var title = $row.find('td:nth-child(2)').text().toLowerCase();
+            var category = $row.find('td:nth-child(5)').text().toLowerCase();
+            var speaker = $row.find('td:nth-child(6)').text().toLowerCase();
+
+            var matchFound = (
+                id.indexOf(value) > -1 ||
+                title.indexOf(value) > -1 ||
+                category.indexOf(value) > -1 ||
+                speaker.indexOf(value) > -1
+            );
+
+            if (matchFound) {
+                $row.show();
+                visibleCount++;
+            } else {
+                $row.hide();
+            }
+        });
+
+        $('#submission-result-count').text('Results: ' + visibleCount);
+        $('#submission-no-results').prop('hidden', visibleCount > 0);
+    });
+
+    // SORT ASCENDING & DESCENDING BY TITLE (Column 2)
+    $('.table-header').on('click', '.icon-button', function(event) {
+        event.preventDefault();
+        var $button = $(this);
+        var rows = $('#submission-table-body tr').get();
+        if (rows.length === 0) return;
+
+        if ($button.find('img[src*="arrow_up"]').length > 0) {
+            rows.sort(function(a, b) {
+                var keyA = $(a).find('td:nth-child(2)').text().toLowerCase();
+                var keyB = $(b).find('td:nth-child(2)').text().toLowerCase();
+                return keyA.localeCompare(keyB);
+            });
+            $.each(rows, function(index, row) {
+                $('#submission-table-body').append(row);
+            });
+        } else if ($button.find('img[src*="arrow_down"]').length > 0) {
+            rows.sort(function(a, b) {
+                var keyA = $(a).find('td:nth-child(2)').text().toLowerCase();
+                var keyB = $(b).find('td:nth-child(2)').text().toLowerCase();
+                return keyB.localeCompare(keyA);
+            });
+            $.each(rows, function(index, row) {
+                $('#submission-table-body').append(row);
+            });
+        }
+    });
+
+});
