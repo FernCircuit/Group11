@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummitPoint | Home</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="cancellations.js"></script>
+
+</head>
+
+<body>
+
+    <!--Navbar and Banner now being fetched from JS. Must Edit navbar.html instead of here-->
+    <div id="header-placeholder"></div>
+    <script src="/header.js"></script>
+    <!--End header-->
+
+    <section class="content" aria-label="Main content">
+        <div class="material-form mx-auto col-md-8 bg-white p-4 rounded shadow-sm"
+            ng-controller="CancellationsController">
+
+            <!--CANCELLATION FORM-->
+            <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+                <h1>Cancellation</h1>
+                <a class="btn btn-sm btn-outline-primary" href="speakers.html">Speakers</a>
+            </div>
+            <div>
+                <p>Need to cancel for whatever reason? Please fill out the following info and we will review your
+                    request.</p>
+                <form>
+                    <!--DETAILS TO CONFIRM WHICH RESERVATION IS BEING CANCELLED-->
+                    <fieldset>
+                        <!----Firstname --->
+                        <div class="mb-3">
+                            <label class="form-label" for="firstName">First Name:</label>
+                            <input class="form-control" type="text" id="firstName" ng-model="cancellation.firstName"
+                                required>
+
+                        </div>
+                        <!---lastname--->
+                        <div class="mb-3">
+                            <label class="form-label" for="lastName">Last Name:</label>
+                            <input class="form-control" type="text" id="lastName" ng-model="cancellation.lastName"
+                                required>
+
+                        </div>
+                        <!----email---->
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email Address:</label>
+                            <input class="form-control" type="email" id="email" ng-model="cancellation.email" required>
+
+                        </div>
+                        <!---phone--->
+                        <div class="mb-3">
+                            <label class="form-label" for="phoneNumber">Phone Number:</label>
+                            <input class="form-control" type="tel" id="phoneNumber" ng-model="cancellation.phoneNumber"
+                                required>
+
+                        </div>
+                    </fieldset>
+                    <div class="table-header">
+                        <!-- JQUERY SEARCH -->
+                        <p>Select the speakers you wish to cancel reservations with.</p>
+                        <!--Search bar, will need JavaScript/jQuery to work.-->
+                        <label class="visually-hidden" for="speaker-search">Search speakers</label>
+                        <input class="form-control speaker-search" type="search" id="speaker-search"
+                            placeholder="Search by name or specialty" autocomplete="off">
+                        <button class="icon-button"><img src="/icons/filter.svg" alt="filter"
+                                class="search-icon"></button>
+                        <button class="icon-button sort-down"><img src="/icons/arrow_down.svg" alt="descending"
+                                class="search-icon"></button>
+                        <button class="icon-button sort-up"><img src="/icons/arrow_up.svg" alt="ascending"
+                                class="search-icon"></button>
+                    </div>
+
+                    <!--Users will select the speaker they with to cancel reservations with here. I imagined having the action buttons be used like usual.
+                    Originally I had wanted a list of checkboxes, but since the assignment asks for jQuery I figured a table would be better-->
+                    <div class="speaker-table mb-3" tabindex="0" aria-label="Scrollable storefront">
+                        <table class="table table-striped table-hover align-middle mb-0" id="shop-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Specialty</th>
+                                    <th>Hourly Rate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="speaker-table-body">
+                                <!----------
+                                ------------
+                                JS generate speakers here
+                                ------------
+                                ---------->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="form-item mb-3">
+                        <label class="form-label" for="reason">Reasoning:</label><br>
+                        <textarea class="form-control" name="reason" id="reason" ng-model="cancellation.reason" rows="5"
+                            cols="40"
+                            placeholder="Please provide some reasoning for why you decided to cancel."></textarea>
+                    </div>
+
+                    <button id="submission-submit" class="btn btn-primary w-100 mt-2" type="submit">Submit Cancellation
+                        Request</button>
+                </form>
+            </div>
+
+
+    </section>
+
+    <section class="footer" aria-label="Page footer">
+        <p>&copy; 2026 SummitPoint. All rights reserved.</p>
+    </section>
+</body>
+
+</html>
