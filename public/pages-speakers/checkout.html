@@ -4,29 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SummitPoint | Checkout</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/form.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="checkout.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <!--NAVBAR now being fetched from JS. Must Edit navbar.html instead of here-->
-    <div id="navbar-placeholder"></div>
-    <script src="/navbar.js"></script>
+    <div id="header-placeholder"></div>
+    <script src="/header.js"></script>
     <!--End Navbar-->
     <main>
     <section class="content" aria-label="Main content">
 <!--------------------START CHECKOUT FORM HERE------------------------->
         <div ng-controller="CheckoutController" class="mx-auto col-md-8 bg-white p-4 rounded shadow-sm">
-
-            <form ng-submit="submit()" ng-show="!submitted" novalidate> <!--turns off angular validation to use vanilla js-->
-
+            <!------GO TO BILLING FORM------------------------------------>
+            <!-- changed to billing() to implement new billing page-->
+            <form ng-submit="getBilling()" ng-show="!showBilling && !submitted" novalidate> <!--turns off angular validation to use vanilla js-->
                 <div class="mb-3">
                 <h1>Before you go!</h1>
                 <h5 class="border-bottom">We need some more information.</h5>
                 </div>
-
                 <!--Load selections from shopping cart with options-->
                 <div class="mb-4">
                     <h5 class="mb-3 pb-2">Your Shopping Cart Summary:</h5>
@@ -34,9 +33,7 @@
                     <p>Select your preferred sessions:</p>
                     <div ng-repeat="speaker in savedSpeakers" class="card p-2 mb-4">
                      <div class="d-flex justify-content-between align-items-baseline">
-                         <h6 class="mb-1 text-primary fw-bold">
-                             SPK-{{("00"+speaker.id).slice(-3)}} - {{speaker.firstname}} {{speaker.lastname}}
-                         </h6>
+                         <h6 class="mb-1 text-primary fw-bold">SPK-{{("00"+speaker.id).slice(-3)}} - {{speaker.firstname}} {{speaker.lastname}}</h6>
                          <span class="text-muted small">${{speaker.rate}} / hr</span>
                      </div>
                         <div class="ms-3 mt-2">
@@ -44,68 +41,149 @@
                                <!--should load checkboxes-->
                                <div class="form-check form-switch fs-5 mb-2">
                                    <label class="form-check-label text-dark fw-semibold">
-                                       <input type="checkbox" ng-model="topic.selected" class="form-check-input"> 
-                                       {{topic.name}}
-                                   </label>
-                               </div>
-
-                                   <div class="ms-4 mt-2 ps-3 border-start text-secondary">
-                                   <div class="mb-2">
-                                       <span class="d-block small fw-bold mb-1">Choose Format:</span>
-                                       <div class="d-flex flex-column gap-1">
-                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="In-Person"> In-Person</label>
-                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="Virtual"> Virtual</label>
-                                        <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="VIP"> VIP</label>
-                                       </div>
-                                    </div>
-                                   <div>
-                                       <span class="d-block small fw-bold mb-1">Select Presentation Duration:</span>
-                                    <select class="form-select form-select-sm d-inline-block w-auto" ng-model="topic.duration" 
-                                        ng-options="hours as label for (hours, label) in {'0.5': '0.5 Hours (Half Hour)', '1.0': '1.0 Hours (1 Hour)', '2.0': '2.0 Hours (2 Hours)'}"></select>
-                                   </div>
+                                       <input type="checkbox" ng-model="topic.selected" class="form-check-input">{{topic.name}}
+                                    </label>
                                 </div>
-                               
-                           </div>
+                                <!-- added topic.selected so options only show when selected -->
+                                <div ng-if="topic.selected" class="ms-4 mt-2 ps-3 border-start text-secondary">
+                                <div class="mb-2">
+                                    <span class="d-block small fw-bold mb-1">Choose Format:</span>
+                                    <div class="d-flex flex-column gap-1">
+                                    <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="In-Person"> In-Person</label>
+                                    <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="Virtual"> Virtual</label>
+                                    <label class="small"><input type="radio" name="type-{{speaker.id}}-{{topic.name}}" ng-model="topic.type" value="VIP"> VIP</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="d-block small fw-bold mb-1">Select Presentation Duration:</span>
+                                    <select class="form-select form-select-sm d-inline-block w-auto" 
+                                            ng-model="topic.duration" 
+                                            ng-options="hours as label for (hours, label) in {'0.5': '0.5 Hours (Half Hour)', '1.0': '1.0 Hours (1 Hour)', '2.0': '2.0 Hours (2 Hours)'}">
+                                    </select>
+                                </div>
+                            </div> 
                         </div>
                     </div>
-                    <div class="card p-3 d-flex flex-row justify-content-between align-items-center mt-3">
-                        <h5 class="mb-0 fw-bold text-uppercase">Total Cost:</h5>
-                        <h4 class="mb-0 fw-bold text-success">${{ orderTotal() }}</h4>
-                    </div>
                 </div>
+                <div class="card p-3 d-flex flex-row justify-content-between align-items-center mt-3">
+                    <h5 class="mb-0 fw-bold text-uppercase">Total Cost:</h5>
+                    <h4 class="mb-0 fw-bold text-success">${{ orderTotal() }}</h4>
+                </div>
+            </div>
+            <!------------------------------------------------
+            --------------------------------------------------
+            -------------Start Contact Info Here: ------------->
+            <div class="mb-3">
+                <h5>Finally, please provide your contact info:</h5>
+                <!----Firstname --->
                 <div class="mb-3">
-                    <h5>Finally, please provide your contact info:</h5>
-                   <!----Firstname --->
-                    <div class="mb-3">
-                        <label class="form-label" for="firstName">First Name:</label>
-                        <input class="form-control" type="text" id="firstName" ng-model="contact.firstName" required>
-                        <div id="firstNameError" class="text-danger small fw-bold mt-1">{{ errors.firstName }}</div>
+                    <label class="form-label" for="firstName">First Name:</label>
+                    <input class="form-control" type="text" id="firstName" ng-model="contact.firstName" required>
+                    <div id="firstNameError" class="text-danger small fw-bold mt-1">{{ errors.firstName }}</div>
+                </div>
+                <!---lastname--->
+                <div class="mb-3">
+                    <label class="form-label" for="lastName">Last Name:</label>
+                    <input class="form-control" type="text" id="lastName" ng-model="contact.lastName" required>
+                    <div id="lastNameError" class="text-danger small fw-bold mt-1">{{ errors.lastName }}</div>
+                </div>
+                <!----email---->
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email Address:</label>
+                    <input class="form-control" type="email" id="email" ng-model="contact.email" required>
+                    <div id="emailError" class="text-danger small fw-bold mt-1">{{ errors.email }}</div>
+                </div>
+                <!---phone--->
+                <div class="mb-3">
+                    <label class="form-label" for="phoneNumber">Phone Number:</label>
+                    <input class="form-control" type="tel" id="phoneNumber" ng-model="contact.phoneNumber" required>
+                    <div id="phoneError" class="text-danger small fw-bold mt-1">{{ errors.phoneNumber }}</div>
+                </div>
+            </div>
+            <!----------------------------------------------
+            ------------------------------------------------
+            ----------Start billing details --------------->
+            <button id="checkout-submit" class="btn btn-primary w-100 mt-2" type="submit">Continue to Billing</button>
+            </form>
+            <!-- Billing Details -->
+            <form ng-submit="submitBilling()" ng-show="showBilling" novalidate>
+                <div class="mb-3">
+                    <h2>Billing Details</h2>
+                </div>
+                <!-----------------------------------------------------------------------
+                ----------------------- Start Order Summary ----------------------------
+                ---------------------------------------------------------------------->
+                <div class="card bg-light p-3 mb-4">
+                    <h5 class="mb-2">Order Summary</h5>
+                    <ul class="mb-2">
+                        <li ng-repeat="speaker in savedSpeakers">
+                            <strong>{{speaker.firstname}} {{speaker.lastname}}</strong>
+                            <ul>
+                                <li ng-repeat="topic in speaker.topicSelections" ng-if="topic.selected">
+                                    {{topic.name}} - {{topic.type}} ({{topic.duration}} hrs)
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="mb-0"><strong>Total Amount:</strong> ${{ orderTotal() }}</p>
+                </div>
+                <!-------------Start Contact Info--------------->
+                <div class="mb-3">
+                    <label class="form-label" for="fullName">Full Name:</label>
+                    <input class="form-control" type="text" id="fullName" ng-model="billing.fullName">
+                    <div id="fullNameError" class="text-danger small fw-bold mt-1">{{ errors.fullNameError }}</div>
+                </div>
+                <!-- Address -->
+                <div class="mb-3">
+                    <label class="form-label" for="street">Street Address:</label>
+                    <input class="form-control" type="text" id="street" ng-model="billing.street">
+                    <div id="streetError" class="text-danger small fw-bold mt-1">{{ errors.streetError }}</div>
+                </div>
+                <div class="row">
+                    <!-- City -->
+                    <div class="col-md-5 mb-3">
+                        <label class="form-label" for="city">City:</label>
+                        <input class="form-control" type="text" id="city" ng-model="billing.city">
+                        <div id="cityError" class="text-danger small fw-bold mt-1">{{ errors.cityError }}</div>
                     </div>
-                    <!---lastname--->
-                    <div class="mb-3">
-                        <label class="form-label" for="lastName">Last Name:</label>
-                        <input class="form-control" type="text" id="lastName" ng-model="contact.lastName" required>
-                        <div id="lastNameError" class="text-danger small fw-bold mt-1">{{ errors.lastName }}</div>
+                    <!-- State -->
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="state">State:</label>
+                        <input class="form-control" type="text" id="state" ng-model="billing.state">
+                        <div id="stateError" class="text-danger small fw-bold mt-1">{{ errors.stateError }}</div>
                     </div>
-                    <!----email---->
-                    <div class="mb-3">
-                        <label class="form-label" for="email">Email Address:</label>
-                        <input class="form-control" type="email" id="email" ng-model="contact.email" required>
-                        <div id="emailError" class="text-danger small fw-bold mt-1">{{ errors.email }}</div>
-                    </div>
-                    <!---phone--->
-                    <div class="mb-3">
-                        <label class="form-label" for="phoneNumber">Phone Number:</label>
-                        <input class="form-control" type="tel" id="phoneNumber" ng-model="contact.phoneNumber" required>
-                        <div id="phoneError" class="text-danger small fw-bold mt-1">{{ errors.phoneNumber }}</div>
+                    <!-- Zip code -->
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="zip">ZIP Code:</label>
+                        <input class="form-control" type="text" id="zip" ng-model="billing.zip">
+                        <div id="zipError" class="text-danger small fw-bold mt-1">{{ errors.zipError }}</div>
                     </div>
                 </div>
-                <button id="checkout-submit" class="btn btn-primary w-100 mt-2" type="submit">Confirm Details</button>
+                <!---------------- Start card info here --------------------->
+                <div class="mb-3">
+                    <!--Card Number-->
+                    <label class="form-label" for="cardNumber">Credit Card Number:</label>
+                    <input class="form-control" type="text" id="cardNumber" ng-model="billing.cardNumber">
+                    <div id="cardError" class="text-danger small fw-bold mt-1">{{ errors.cardError }}</div>
+                </div>
+                <div class="row">
+                    <!--Expiration date-->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="expDate">Expiration Date (MM/YY):</label>
+                        <input class="form-control" type="text" id="expDate" placeholder="MM/YY" ng-model="billing.expDate">
+                        <div id="expError" class="text-danger small fw-bold mt-1">{{ errors.expError }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <!--cvv-->
+                        <label class="form-label" for="cvv">Security Code:</label>
+                        <input class="form-control" type="text" id="cvv" ng-model="billing.cvv">
+                        <div id="cvvError" class="text-danger small fw-bold mt-1">{{ errors.cvvError }}</div>
+                    </div>
+                </div>
+                <button id="billing-submit" class="btn btn-primary w-100 mt-2" type="submit">Confirm Details</button>
             </form>
-
             <div ng-show="submitted" class="confirmation">
                 <h2>Request Confirmed!</h2>
-
                 <p><strong>First Name:</strong> {{ contact.firstName }}</p>
                 <p><strong>Last Name:</strong> {{ contact.lastName }}</p>
                 <p><strong>Email:</strong> {{ contact.email }}</p>

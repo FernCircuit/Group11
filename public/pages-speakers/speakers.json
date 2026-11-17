@@ -122,5 +122,15 @@
     "availableTopics": [
       "Securing Modern Web Applications"
     ]
+  },
+  {
+    "id": 1794790021583,
+    "firstname": "Devon",
+    "lastname": "Brooks",
+    "specialty": "Technology",
+    "rate": 0,
+    "availableTopics": [
+      "Back-End Web Development with Node.js"
+    ]
   }
 ]

@@ -10,16 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="validate.js"></script>
     <script src="submissions.js"></script>
-
 </head>
-
 <body>
-
     <!--Navbar and Banner now being fetched from JS. Must Edit navbar.html instead of here-->
     <div id="header-placeholder"></div>
     <script src="/header.js"></script>
     <!--End header-->
-
     <section class="content" aria-label="Main content">
         <div class="submission-form mx-auto col-md-8 bg-white p-4 rounded shadow-sm" ng-controller="SubmissionController">
             <div ng-show="!submitted">
@@ -30,37 +26,30 @@
                 <p>Got a session suggestion for a conference? Fill out this form and our team of reveiwers will look it over for you!</p>
                 <form ng-submit="submit()" novalidate> <!-- added novalidate to turn off the auto errors-->
                     <fieldset>
-
                         <!--title-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="session-title">Session Title:</label>
                             <input class="form-control" type="text" name="session-title" id="session-title" ng-model="submission.title">
                             <span id="titleError" class="text-danger small"></span>
-
-
                         </div>
-
                         <!--time-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="session-time">Session Time:</label>
                             <input class="form-control" type="time" name="session-time" id="session-time" ng-model="submission.time">
                             <span id="timeError" class="text-danger small"></span>
                         </div>
-
                         <!--duration-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="session-duration">Session Duration (minutes):</label>
                             <input class="form-control" type="number" name="session-duration" id="session-duration" min="15" step="15" ng-model="submission.duration">
                             <span id="durationError" class="text-danger small"></span>
                         </div>
-
                         <!--category-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="category">Category:</label>
                             <input class="form-control" type="text" name="category" id="category" ng-model="submission.category">
                             <span id="categoryError" class="text-danger small"></span>
                         </div>
-
                         <!--speaker-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="speaker">Speaker:</label>
@@ -80,7 +69,6 @@
                                     ng-model="submission.customSpeaker">
                                     <span id="speakerError" class="text-danger small"></span>
                         </div>
-
                         <!--abstract-->
                         <div class="form-item mb-3">
                             <label class="form-label" for="abstract">Abstract:</label><br>
@@ -91,7 +79,6 @@
                     <button id="submission-submit" class="btn btn-primary w-100 mt-2" type="submit">Submit Form</button>
                 </form>
             </div>
-
             <div ng-show="submitted && !finalized" class="confirmation">
                 <h2>Form Submitted!</h2>
                 <p>Please provide your email and phone number. We will contact you when your submission has been reviewed.</p>
@@ -103,18 +90,15 @@
                         <input class="form-control" type="email" id="email" ng-model="contact.email">
                         <span id="emailError" class="text-danger small"></span>
                     </div>
-
                     <!--Phone Number-->
                     <div class="mb-3">
                             <label class="form-label" for="phoneNumber">Phone Number:</label>
                             <input class="form-control" type="tel" id="phoneNumber" ng-model="contact.phoneNumber">
                             <span id="phoneError" class="text-danger small"></span>
                     </div>
-
                     <button id="contact-submit" class="btn btn-primary w-100 mt-2" type="submit">Finalize</button>
                 </form>
             </div>
-
             <div ng-show="finalized">
                 <h2>Thank you for your submission!</h2>
                 <p>If you wish to file another submission, please click the button below.</p>
@@ -122,10 +106,8 @@
             </div>
         </div>
     </section>
-
     <section class="footer" aria-label="Page footer">
         <p>&copy; 2026 SummitPoint. All rights reserved.</p>
     </section>    
 </body>
-
 </html>

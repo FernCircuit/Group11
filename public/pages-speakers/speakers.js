@@ -211,6 +211,6 @@ document.getElementById('cart-table-body').addEventListener('click', function(ev
 });
   //check out button
 document.getElementById('checkout-btn').addEventListener('click', function(event){
-  window.location.href = "/Group11/checkout.html";
+  window.location.href = "/pages-speakers/checkout.html";
 }); //when clicked, run checkout() function
   

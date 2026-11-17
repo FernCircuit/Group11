@@ -4,34 +4,53 @@
 var app = angular.module("checkoutApp", []);
 //controller & $scope: everything with $scope connects js to html
 app.controller("CheckoutController", function($scope, $http) { //added $http to connect to ajax
-
-    //Contact details
+    //--------------------------
+    //-----Contact details------
     $scope.contact = {
         firstName: "",
         lastName: "",
         email: "",
         phoneNumber: ""
     };
-    //error tracking
+    //--------------------------
+    //----Billing Stuff---------
+    $scope.billing = {
+        fullName: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: "",
+        cardNumber: "",
+        expDate: "",
+        cvv: ""
+    };
+    //--------------------------
+    //-----Error tracking-------
     $scope.errors = {
         firstName: "",
         lastName: "",
         email: "",
         phoneNumber: ""
     };
-    // Create an array to hold the saved speakers
+    //---------------------------------------
+    //---Array to hold the saved speakers----
     $scope.savedSpeakers = [];
-    $scope.submitted = false;
-
-    // Load the shopping cart from localStorage
+    //
+    $scope.submitted = false; //set submitted to false by default
+    $scope.showBilling = false; //set billing to false by default
+    //---------------------------------------
+    //-----Load the shopping cart-----------
     var storedSpeakers = localStorage.getItem("SummitPointCart");
-
+    //--------------------------------------
+    //----Check for stored speakers first
+    //----if true, add to original cart (localStorage)
     if(storedSpeakers){
         var origCart = JSON.parse(storedSpeakers);
-        $scope.savedSpeakers = origCart.map(function(speaker){
+        $scope.savedSpeakers = origCart.map(function(speaker){//map original cart
             if(speaker.topicSelections && speaker.topicSelections.length > 0){
-                return speaker;
+                return speaker;//return speaker if exists
             }
+            //do the same for the topics
             var topics = speaker.availableTopics || [];
             speaker.topicSelections = topics.map(function(topicName){
                 return{
@@ -46,12 +65,49 @@ app.controller("CheckoutController", function($scope, $http) { //added $http to 
     }else{
         $scope.savedSpeakers = [];
     }
-  
     //call the calculation function
     $scope.orderTotal = function(){
         return calculateOrderTotal();
     };
-    
+    //show billing page
+    $scope.getBilling = function(){
+        if(validateForm() == false){
+            return; //if validate form didn't go then exit
+        }
+        $scope.showBilling = true;
+    };
+    // SUBMIT BILLING
+    $scope.submitBilling = function(){
+        if(validateBilling() == false){
+            return;
+        }
+        var billingJson = {
+            name: $scope.billing.fullName,
+            streetAddr: $scope.billing.street,
+            city: $scope.billing.city,
+            state: $scope.billing.state,
+            zip: $scope.billing.zip,
+            cardNumber:$scope.billing.cardNumber,
+            expDate: $scope.billing.expDate,
+            cvv: $scope.billing.cvv
+        }
+   
+    //AJAX....
+    $http.post("/api/billing", billingJson)
+        .then(function(response){
+            console.log("Server connection successful");
+            localStorage.removeItem('SummitPointCart');
+            $scope.showBilling = false; //set billing back to false
+            $scope.submitted = true; //change default to true
+        })
+        .catch(function(error){
+            console.log("Testing ajax...");
+            console.error("HTTP Response Code:", error.status);
+            localStorage.removeItem('SummitPointCart');//reset cart cache
+            $scope.showBilling = false;//reset billing false
+            $scope.submitted = true; //set to true
+    });
+};
     //SUBMIT FUNCTION
     //when form is submitted, toggle form to true
     $scope.submit = function() {
@@ -115,9 +171,11 @@ function validateForm(){ //formData gives access to the angular file which I had
     lastNameError.innerText = "";
     phoneError.innerText = "";
     emailError.innerText = "";
+    
     //variables needed for error checking
     var isFormValid = true; //reset form to true
     const invalidChars = /[^A-Za-z\s-]/; //set invalid char: letters, spaces, hyphens
+
     //Validate the cart
     var selectedCount = 0;
     var cartValidationPassed = true;
@@ -186,5 +244,104 @@ function validateForm(){ //formData gives access to the angular file which I had
         isFormValid = false;
     }
     return isFormValid;
+   }
+    //Added new billing function
+   function validateBilling(){
+        //target all the error divs
+        let fullNameError = document.getElementById("fullNameError");
+        let streetError = document.getElementById("streetError");
+        let cityError = document.getElementById("cityError");
+        let zipError = document.getElementById("zipError");
+        let stateError = document.getElementById("stateError");
+        let cardError = document.getElementById("cardError");
+        let expError = document.getElementById("expError");
+        let cvvError = document.getElementById("cvvError");
+        //clear the error fields
+        fullNameError.innerText = "";
+        streetError.innerText = "";
+        cityError.innerText = "";
+        zipError.innerText = "";
+        stateError.innerText = "";
+        cardError.innerText = "";
+        expError.innerText = "";
+        cvvError.innerText = "";
+        //set billing to true
+        var isBillingValid = true;
+        const invalidChars = /[^A-Za-z\s-]/; //set invalid char: letters, spaces, hyphens
+
+       //check for missing/invalid data
+        var fullName = $scope.billing.fullName || "";
+        var street = $scope.billing.street || "";
+        var city = $scope.billing.city || "";
+        var state = $scope.billing.state || "";
+        var zip = $scope.billing.zip || "";
+        var card = $scope.billing.cardNumber || "";
+        var expDate = $scope.billing.expDate || "";
+        var cvv = $scope.billing.cvv || "";
+
+        //do all the checks and display errors where necessary
+        //check full name:
+        if(fullName == ""){
+            fullNameError.innerText = "This field is required.";
+            isBillingValid = false;
+        } else if(invalidChars.test(fullName)){
+            fullNameError.innerText = "Please enter valid full name.";
+            isBillingValid = false;
+        }
+        //check street:
+        if(street == ""){
+            streetError.innerText = "This field is required.";
+            isBillingValid = false;
+        }
+        //check city:
+        if(city == ""){
+            cityError.innerText = "This field is required.";
+            isBillingValid = false;
+        } else if(invalidChars.test(city)){
+            cityError.innerText = "Please enter valid city.";
+            isBillingValid = false;
+        }
+        //check state:
+        if(state == ""){
+            stateError.innerText = "This field is required.";
+            isBillingValid = false;
+        } else if(state.length != 2 || invalidChars.test(state)){
+            stateError.innerText = "Please enter valid state.";
+            isBillingValid = false;
+        }
+        //check zip:
+        if(zip == ""){
+            zipError.innerText = "This field is required.";
+            isBillingValid = false;
+        } else if(zip.length != 5 || isNaN(zip)){
+            zipError.innerText = "Please enter valid 5-digit zip code.";
+            isBillingValid = false;
+        }
+        //check credit card:
+        if(card == ""){
+            cardError.innerText = "This field is required.";
+            isBillingValid = false;
+        } else if(card.length != 16 || isNaN(card)){
+            cardError.innerText = "Please enter valid 16-digit card number.";
+            isBillingValid = false;
+        }
+        //check expiration date:
+        if(expDate == ""){
+            expError.innerText = "This field is required.";
+            isBillingValid = false;
+        } else if(expDate.length != 5 || expDate.charAt(2) != "/"){
+            expError.innerText = "Please enter valid MM/YY date.";
+            isBillingValid = false;
+        }
+
+        //check cvv:
+        if(cvv == ""){
+            cvvError.innerText = "This field is required.";
+            isBillingValid = false;
+        } else if((cvv.length != 3 && cvv.length != 4) || isNaN(cvv)){
+            cvvError.innerText = "Please enter valid security code.";
+            isBillingValid = false;
+        }
+        return isBillingValid;
     }
 });
