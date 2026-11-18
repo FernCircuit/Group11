@@ -41,31 +41,28 @@
                         <!----Firstname --->
                         <div class="mb-3">
                             <label class="form-label" for="firstName">First Name:</label>
-                            <input class="form-control" type="text" id="firstName" ng-model="cancellation.firstName"
-                                required>
+                            <input class="form-control" type="text" id="firstName" ng-model="cancellation.firstName">
                             <div id="firstNameError" class="text-danger" aria-live="polite"></div>
 
                         </div>
                         <!---lastname--->
                         <div class="mb-3">
                             <label class="form-label" for="lastName">Last Name:</label>
-                            <input class="form-control" type="text" id="lastName" ng-model="cancellation.lastName"
-                                required>
+                            <input class="form-control" type="text" id="lastName" ng-model="cancellation.lastName">
                             <div id="lastNameError" class="text-danger" aria-live="polite"></div>
 
                         </div>
                         <!----email---->
                         <div class="mb-3">
                             <label class="form-label" for="email">Email Address:</label>
-                            <input class="form-control" type="email" id="email" ng-model="cancellation.email" required>
+                            <input class="form-control" type="email" id="email" ng-model="cancellation.email">
                             <div id="emailError" class="text-danger" aria-live="polite"></div>
 
                         </div>
                         <!---phone--->
                         <div class="mb-3">
                             <label class="form-label" for="phoneNumber">Phone Number:</label>
-                            <input class="form-control" type="tel" id="phoneNumber" ng-model="cancellation.phoneNumber"
-                                required>
+                            <input class="form-control" type="tel" id="phoneNumber" ng-model="cancellation.phoneNumber">
                             <div id="phoneNumberError" class="text-danger" aria-live="polite"></div>
 
                         </div>
@@ -88,7 +85,8 @@
                     <!--Users will select the speaker they with to cancel reservations with here. I imagined having the action buttons be used like usual.
                     Originally I had wanted a list of checkboxes, but since the assignment asks for jQuery I figured a table would be better-->
                     <p class="speaker-result-count" id="cancellation-result-count" aria-live="polite">Results: 0</p>
-                    <p class="fw-bold" aria-live="polite">Selected speakers total: {{ cancellation.price | currency }}</p>
+                    <p class="fw-bold" aria-live="polite">Selected speakers total: {{ cancellation.price | currency }}
+                    </p>
                     <div id="speakersError" class="text-danger mb-2" aria-live="polite"></div>
                     <div class="speaker-table mb-3" tabindex="0" aria-label="Scrollable storefront">
                         <table class="table table-striped table-hover align-middle mb-0" id="shop-table">
@@ -134,10 +132,12 @@
                         <textarea class="form-control" name="reason" id="reason" ng-model="cancellation.reason" rows="5"
                             cols="40"
                             placeholder="Please provide some reasoning for why you decided to cancel."></textarea>
+                        <div id="reasonError" class="text-danger" aria-live="polite"></div>
                     </div>
 
                     <button id="cancellation-submit" class="btn btn-primary w-100 mt-2" type="submit"
-                        ng-disabled="submitting">{{ submitting ? "Submitting..." : "Submit Cancellation Request" }}</button>
+                        ng-disabled="submitting">{{ submitting ? "Submitting..." : "Submit Cancellation Request"
+                        }}</button>
                 </form>
             </div>
             <div ng-show="submitted">

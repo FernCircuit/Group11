@@ -4,7 +4,8 @@ function validateCancellationForm(cancellationData) {
         lastName: document.getElementById("lastNameError"),
         email: document.getElementById("emailError"),
         phoneNumber: document.getElementById("phoneNumberError"),
-        speakers: document.getElementById("speakersError")
+        speakers: document.getElementById("speakersError"),
+        reason: document.getElementById("reasonError")
     };
 
     Object.keys(errors).forEach(function (field) {
@@ -43,6 +44,11 @@ function validateCancellationForm(cancellationData) {
 
     if (!Array.isArray(cancellationData.speakers) || cancellationData.speakers.length === 0) {
         errors.speakers.textContent = "Select at least one speaker.";
+        isValid = false;
+    }
+
+    if (!(cancellationData.reason || "").trim()) {
+        errors.reason.textContent = "This field is required.";
         isValid = false;
     }
 
