@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="orderApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummitPoint | Orders</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="orders.js"></script>
+</head>
+
+<body ng-controller="orderController">
+
+    <!--NAVBAR now being fetched from JS. Must Edit navbar.html instead of here-->
+    <div id="header-placeholder"></div>
+    <script src="/header.js"></script>
+    <!--End Navbar-->
+
+    <section class="content" aria-label="Main content">
+        <div class="material-form mx-auto col-md-8 bg-white p-4 rounded shadow-sm">
+
+            <div class="table-header">
+                <h5>Orders Review</h5>
+                <a class="btn btn-sm btn-outline-primary" href="speakers.html">New Order</a>
+
+                <!-- JQUERY SEARCH -->
+                <p>Search and manage orders</p>
+                <!--Search bar, will need JavaScript/jQuery to work.-->
+                <label class="visually-hidden" for="order-search">Search orders</label>
+                <input class="form-control order-search" type="search" id="order-search" 
+                        placeholder="Search by ID, title, category, speaker, etc." 
+                        autocomplete="off">
+                <button type="button" class="icon-button"><img src="/icons/filter.svg" alt="filter" class="search-icon"></button>
+                <button type="button" class="icon-button sort-down"><img src="/icons/arrow_down.svg" alt="descending" class="search-icon"></button>
+                <button type="button" class="icon-button sort-up"><img src="/icons/arrow_up.svg" alt="ascending" class="search-icon"></button>
+            </div>
+
+            <p class="order-result-count" id="order-result-count" aria-live="polite">Results: {{ orders.length }}</p>
+            <div class="material-table" tabindex="0" aria-label="Scrollable orders">
+            <!--TABLE FOR DISPLAYING THE JSON DATA. CONTENTS ARE VISUAL TILL WE GET WORKING JSON DATA FOR THE TABLE-->    
+                <table class="table table-striped table-hover align-middle mb-0" id="material-table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Time</th>
+                            <th>Category</th>
+                            <th>Rate</th>
+                            <th>Hours</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-table-body">
+                        <!--Submissions from submissions.html will be shown here using AngularJS-->
+                        <tr ng-repeat="item in orders">
+                            <td>{{ item.orderId }}</td>
+                            <td>{{ item.date }}</td>
+                            <td>{{ item.items[0].category }} min</td>
+                            <td>{{ item.items[0].rate }}</td>
+                            <td>{{ item.items[0].hours }}</td>
+                            <td>{{ item.totalCost }}</td>
+                            <td>
+                                <span class="badge"
+                                      ng-class="{
+                                          'bg-warning text-dark': item.status === 'pending',
+                                          'bg-success': item.status === 'confirmed' || item.status === 'approved',
+                                          'bg-danger': item.status === 'rejected'
+                                      }">
+                                    {{ item.status | uppercase }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <button 
+                                      class="btn btn-success btn-sm" 
+                                      ng-click="updateStatus(item, 'approved')" 
+                                      ng-disabled="item.status === 'approved'">
+                                        Approve
+                                    </button>
+                                    <button 
+                                      class="btn btn-danger btn-sm" 
+                                      ng-click="updateStatus(item, 'rejected')" 
+                                      ng-disabled="item.status === 'rejected'">
+                                        Reject
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="order-no-results" id="order-no-results" hidden>No orders match your search.</p>
+            </div>
+        </div>
+    </section>
+    <section class="footer" aria-label="Page footer">
+        <p>&copy; 2026 SummitPoint. All rights reserved.</p>
+    </section>    
+</body>
+
+</html>
