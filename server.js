@@ -13,13 +13,13 @@ app.use(express.json());
 //creates the full json path
 const speakersFile = path.join(__dirname, "public", "pages-speakers", "speakers.json");
 const submissionsFile = path.join(__dirname, "public", "pages-submissions", "submissions.json");
-const ordersFile = path.join(__dirname, "public", "pages-checkout", "orders.json");
+const cancellationsFile = path.join(__dirname, "public", "pages-speakers", "cancellations.json");
 
 //CREATE THE ARRAYS TO HOLD THINGS.......
 // Arrays to hold items
 let submissions = [];
 let speakers = [];
-let orders = [];
+let cancellations = [];
 
 //CHECK IF THINGS EXIST............
 //Speakers.json already exists?
@@ -30,9 +30,9 @@ if (fs.existsSync(speakersFile)) {
 if(fs.existsSync(submissionsFile)){
     submissions = JSON.parse(fs.readFileSync(submissionsFile, "utf8"));
 }
-//Orders.json exists?
-if(fs.existsSync(ordersFile)){
-    orders = JSON.parse(fs.readFileSync(ordersFile, "utf8"));
+//Cancellations.json exists?
+if(fs.existsSync(cancellationsFile)){
+    cancellations = JSON.parse(fs.readFileSync(cancellationsFile, "utf8"));
 }
 //END CHECKING IF THINGS EXISTS.....
 
@@ -46,9 +46,9 @@ app.get("/api/submissions", function(request, response) {
 app.get("/api/speakers", function(request, response){
     response.json(speakers);
 });
-//  orders
-app.get("/api/orders", function(request, response){
-    response.json(orders);
+//  cancellations
+app.get("/api/cancellations", function(request, response){
+    response.json(cancellations);
 });
 // END GETS..........
 //
@@ -70,24 +70,27 @@ app.post("/api/submissions", function(request, response) {
     fs.writeFileSync(submissionsFile, JSON.stringify(submissions));
     response.status(201).json({ message: "Submission saved", data: newSubmission });
 });
-//  orders
-app.post("/api/orders", function(request, response) { //tells express server to wait for POST from Angular JS
-    const nextNumber = orders.length + 1;
+//  cancellations
+app.post("/api/cancellations", function(request, response) { //tells express server to wait for POST from Angular JS
+    const nextNumber = cancellations.length + 1;
     const id = ("000"+nextNumber).slice(-4);
 
-    const newOrder = { //create the new order format
-        orderId: "ORD-" + id,
+    const newCancellations = { //create the new cancellation format
+        canId: "CAN-" + id,
         date: new Date().toISOString(),
-        contact: request.body.contact,
-        billing: request.body.billing,
-        items: request.body.items,
-        totalCost: request.body.totalCost,
-        status: "Confirmed"
+        firstName: request.body.firstName,
+        lastName: request.body.lastName,
+        email: request.body.email,
+        phoneNumber: request.body.phoneNumber,
+        speakers: request.body.speakers,
+        price: request.body.price,
+        reason: request.body.reason,
+        status: "pending"
     };
 
-    orders.push(newOrder); //adds the order to the array
-    fs.writeFileSync(ordersFile, JSON.stringify(orders)); //writes the file
-    response.status(201).json({ message: "Order saved", data: newOrder }); //http code 201 is "Created"
+    cancellations.push(newCancellations); //adds the cancellation to the array
+    fs.writeFileSync(cancellationsFile, JSON.stringify(cancellations)); //writes the file
+    response.status(201).json({ message: "Cancellation saved", data: newCancellations }); //http code 201 is "Created"
 });
 // END POSTS..........
 //
@@ -128,18 +131,18 @@ app.put("/api/submissions/:id", function (request, response) {
     }
     response.json({ message: "Status updated", data: item });
 });
-//orders put
-app.put("/api/orders/:id", function(request, response){
+//Cancellations put
+app.put("/api/cancellations/:id", function(request, response){
     const id = request.params.id;
-    const item = orders.find(function(order){
-        return order.orderId == id;
+    const item = cancellations.find(function(cancellation){
+        return cancellation.canId == id;
     })
     if(!item){
-        return response.status(404).json({ message: "Order not found" });
+        return response.status(404).json({ message: "Cancellation not found" });
     }
     item.status = request.body.status;
-    fs.writeFileSync(ordersFile, JSON.stringify(orders));
-    response.json({ message: "Order status updated", data:item});
+    fs.writeFileSync(cancellationsFile, JSON.stringify(cancellations));
+    response.json({ message: "Cancellation status updated", data:item});
 });
 //speakers
 app.post("/api/speakers", function(request, response){
